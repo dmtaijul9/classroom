@@ -64,13 +64,15 @@ const SignUpPage = () => {
               type="text"
               className="block w-full p-3 mb-4 border rounded border-grey-light"
               name="name"
+              required
               value={inputs.name}
               onChange={handleChange}
               placeholder="Full Name"
             />
 
             <input
-              type="text"
+              type="email"
+              required
               className="block w-full p-3 mb-4 border rounded border-grey-light"
               name="email"
               value={inputs.email}
@@ -81,18 +83,20 @@ const SignUpPage = () => {
               name="role"
               className="block w-full p-3 mb-4 border rounded border-grey-light"
               value={inputs.role}
+              required
               onChange={handleChange}
             >
               <option value="">Select a type</option>
 
-              <option value="student">Student</option>
-              <option value="teacher">Teacher</option>
+              <option value="STUDENT">Student</option>
+              <option value="TEACHER">Teacher</option>
             </select>
 
             <input
               type="password"
               className="block w-full p-3 mb-4 border rounded border-grey-light"
               name="password"
+              required
               value={inputs.password}
               onChange={handleChange}
               placeholder="Password"
@@ -101,6 +105,7 @@ const SignUpPage = () => {
               type="password"
               className="block w-full p-3 mb-4 border rounded border-grey-light"
               name="confirm_password"
+              required
               value={inputs.confirm_password}
               onChange={handleChange}
               placeholder="Confirm Password"

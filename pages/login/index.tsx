@@ -1,26 +1,40 @@
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 import Layout from "../../components/UI/Layout";
 import { useForm } from "../../lib/useForm";
 import { useSession, signIn, signOut } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 
 const index = () => {
   const { data: session, status } = useSession();
+  const router = useRouter();
   const { inputs, handleChange } = useForm({
     email: "",
     password: "",
   });
 
+  useEffect(() => {
+    if (session) {
+      router.push("/");
+    }
+  }, [session]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(inputs);
-    const data = await signIn("credentials", {
+
+    const res = await signIn("credentials", {
       redirect: false,
       email: inputs.email,
       password: inputs.password,
     });
-    console.log(data);
+    console.log(res);
+    if (!res?.ok) {
+      return toast.error(res?.error);
+    }
+    toast.success("Login Successfull!");
+    router.push("/");
   };
   return (
     <Layout>
@@ -45,6 +59,7 @@ const index = () => {
                       placeholder="mike@gmail.com"
                       name="email"
                       onChange={handleChange}
+                      required
                     />
                   </div>
                   <div className="mt-8">

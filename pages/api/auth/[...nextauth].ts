@@ -28,13 +28,20 @@ export default NextAuth({
             email,
           },
         });
-        console.log(user);
 
         if (!user) {
-          throw new Error("Incorrect Username or password");
+          throw new Error("Incorrect Email!");
         }
 
-        const checkPassword = await bcryptjs.compare(password, user?.password);
+        const checkedPassword = await bcryptjs.compare(
+          password,
+          user?.password
+        );
+
+        console.log(checkedPassword);
+        if (!checkedPassword) {
+          throw new Error("Password Does not Match!");
+        }
 
         return {
           id: user.id,
