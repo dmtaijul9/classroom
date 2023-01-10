@@ -1,11 +1,21 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 
 const index = () => {
   const { data: session, status } = useSession();
   const [menuOpen, setMenuOpen] = useState(false);
+  console.log(session);
+
+  const logoutHandler = async () => {
+    try {
+      await signOut();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="z-50 px-6 pt-6 lg:px-8">
@@ -62,26 +72,39 @@ const index = () => {
               About
             </a>
 
-            <Link
-              href="/createclass"
-              className="font-semibold text-gray-900 hover:text-gray-900"
-            >
-              Create Class
-            </Link>
-            <Link
-              href="/signup"
-              className="font-semibold text-gray-900 hover:text-gray-900"
-            >
-              Create acount
-            </Link>
+            {session?.user.role === "TEACHER" && (
+              <Link
+                href="/createclass"
+                className="font-semibold text-gray-900 hover:text-gray-900"
+              >
+                Create Class
+              </Link>
+            )}
+            {session?.user.role === "ADMIN" && (
+              <Link
+                href="/signup"
+                className="font-semibold text-gray-900 hover:text-gray-900"
+              >
+                Create acount
+              </Link>
+            )}
           </div>
           <div className="hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-end">
-            <Link
-              href="/login"
-              className="inline-block rounded-lg px-3 py-1.5 text-sm font-semibold leading-6 text-gray-900 shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20"
-            >
-              Log in
-            </Link>
+            {session?.user?.name ? (
+              <button
+                onClick={logoutHandler}
+                className="inline-block rounded-lg px-3 py-1.5 text-sm font-semibold leading-6 text-gray-900 shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20"
+              >
+                Log out
+              </button>
+            ) : (
+              <Link
+                href="/login"
+                className="inline-block rounded-lg px-3 py-1.5 text-sm font-semibold leading-6 text-gray-900 shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20"
+              >
+                Log in
+              </Link>
+            )}
           </div>
         </nav>
         {/*       <!-- Mobile menu, show/hide based on menu open state. --> */}
