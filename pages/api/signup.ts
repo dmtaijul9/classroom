@@ -30,9 +30,9 @@ export default async function handler(
           }
           const variables = {
             name,
-            email,
+            email: email.toLowerCase(),
             password: hashed,
-            role: role.toLowerCase(),
+            role,
           };
           try {
             const createdUser = await prisma.user.create({ data: variables });
