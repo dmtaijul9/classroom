@@ -4,7 +4,7 @@ import React, { useState } from "react";
 
 const index = () => {
   const { data: session, status } = useSession();
-  console.log(session);
+
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
   return (
@@ -17,7 +17,7 @@ const index = () => {
           <div className="flex lg:min-w-0 lg:flex-1" aria-label="Global">
             <Link href="/" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
-              <h1 className="font-bold"> Logo</h1>
+              <h1 className="font-bold"> ClassRoom</h1>
             </Link>
           </div>
           <div className="flex lg:hidden">
@@ -62,12 +62,12 @@ const index = () => {
               About
             </a>
 
-            <a
-              href="#"
+            <Link
+              href="/create-class"
               className="font-semibold text-gray-900 hover:text-gray-900"
             >
-              Contact
-            </a>
+              Create Class
+            </Link>
             <Link
               href="/signup"
               className="font-semibold text-gray-900 hover:text-gray-900"

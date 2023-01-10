@@ -2,24 +2,35 @@ import Image from "next/image";
 import React, { useEffect } from "react";
 import Layout from "../../components/UI/Layout";
 import { useForm } from "../../lib/useForm";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signIn, signOut, getSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 
+export async function getServerSideProps({ req }) {
+  const session = await getSession({ req });
+
+  if (session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  // Use this session information where you want.
+  return {
+    props: {},
+  };
+}
+
 const index = () => {
-  const { data: session, status } = useSession();
   const router = useRouter();
   const { inputs, handleChange } = useForm({
     email: "",
     password: "",
   });
-
-  useEffect(() => {
-    if (session) {
-      router.push("/");
-    }
-  }, [session]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,11 +40,11 @@ const index = () => {
       email: inputs.email,
       password: inputs.password,
     });
-    console.log(res);
+
     if (!res?.ok) {
       return toast.error(res?.error);
     }
-    toast.success("Login Successfull!");
+    //  toast.success("Login Successfull!");
     router.push("/");
   };
   return (
