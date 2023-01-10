@@ -12,7 +12,7 @@ const SignUpPage = () => {
     password: "",
     confirm_password: "",
   });
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     const { name, email, role, password, confirm_password } = inputs;
     if (

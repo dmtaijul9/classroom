@@ -1,11 +1,11 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import React, { useState } from "react";
 
 const index = () => {
   const { data: session, status } = useSession();
-
-  const [menuOpen, setMenuOpen] = useState<boolean>(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <div className="z-50 px-6 pt-6 lg:px-8">
@@ -63,7 +63,7 @@ const index = () => {
             </a>
 
             <Link
-              href="/create-class"
+              href="/createclass"
               className="font-semibold text-gray-900 hover:text-gray-900"
             >
               Create Class
