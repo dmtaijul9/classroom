@@ -41,6 +41,7 @@ export default async function handler(
               user: createdUser,
             });
           } catch (error) {
+            //@ts-ignore
             res.status(400).json({ message: error.message });
           }
         });
