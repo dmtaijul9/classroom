@@ -67,7 +67,9 @@ export default NextAuth({
       return token;
     },
     async session({ session, token }) {
+      //@ts-ignore
       session.user = token.user;
+      //@ts-ignore
       session.accessToken = token.accessToken;
       console.log(session);
 
@@ -75,5 +77,6 @@ export default NextAuth({
     },
   },
   secret: process.env.NEXT_AUTH_SECRET,
+  //@ts-ignore
   url: process.env.NEXTAUTH_URL,
 });

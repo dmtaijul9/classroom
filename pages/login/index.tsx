@@ -8,7 +8,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 
-export async function getServerSideProps({ req }) {
+export async function getServerSideProps({ req }: any) {
   const session = await getSession({ req });
 
   if (session) {
@@ -33,7 +33,7 @@ const index = () => {
     password: "",
   });
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     const res = await signIn("credentials", {

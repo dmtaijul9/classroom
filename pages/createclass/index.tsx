@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useEffect } from "react";
 import Layout from "../../components/UI/Layout";
 import { useForm } from "../../lib/useForm";
@@ -17,7 +18,7 @@ const index = () => {
     }
   }, [session]);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     console.log(inputs);
     const { name, subject } = inputs;
@@ -27,6 +28,7 @@ const index = () => {
     const variables = {
       name,
       subject,
+      //@ts-ignore
       userId: session?.user.id,
     };
     const res = await axios({
