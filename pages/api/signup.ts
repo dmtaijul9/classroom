@@ -10,6 +10,7 @@ export default async function handler(
   console.log(req.method);
   if (req.method === "POST") {
     const { name, email, role, password } = req.body;
+
     try {
       if (
         name.trim() === "" ||
