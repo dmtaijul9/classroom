@@ -17,6 +17,7 @@ const navigation = [
   { name: "About", href: "/about", current: false },
 ];
 
+//@ts-ignore
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
