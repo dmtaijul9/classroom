@@ -43,6 +43,7 @@ const SignUpPage = () => {
         role,
         password,
       };
+      //@ts-ignore
       const res = await signupMutation.mutateAsync(variables);
       toast.success(res.data.message);
       console.log(res);
