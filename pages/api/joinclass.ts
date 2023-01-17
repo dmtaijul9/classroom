@@ -35,11 +35,11 @@ export default async function handler(
         },
       });
       //@ts-ignore
+
       if (isAlreadyStudent?.students.length >= 1) {
         throw new Error("You are already a student!");
       }
 
-      console.log(isAlreadyStudent);
       const joinedClass = await prisma.classRoom.update({
         where: {
           joinCode,
@@ -48,7 +48,11 @@ export default async function handler(
           students: {
             //@ts-ignore
             create: {
-              userId,
+              User: {
+                connect: {
+                  id: userId,
+                },
+              },
             },
           },
         },

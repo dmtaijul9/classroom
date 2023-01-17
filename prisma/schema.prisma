@@ -26,11 +26,12 @@ model User {
 }
 
 model ClassroomWithUsers {
-  id          String     @id @default(cuid())
   ClassRoom   ClassRoom? @relation(fields: [classRoomId], references: [id])
   classRoomId String
   User        User?      @relation(fields: [userId], references: [id])
   userId      String
+
+  @@id([userId])
 }
 
 model ClassRoom {
