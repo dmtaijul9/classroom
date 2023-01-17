@@ -24,7 +24,6 @@ function classNames(...classes) {
 const HeaderNav = () => {
   const { data: session, status } = useSession();
   const [menuOpen, setMenuOpen] = useState(false);
-  console.log(session);
 
   const logoutHandler = async () => {
     try {
@@ -44,7 +43,7 @@ const HeaderNav = () => {
     <Disclosure as="nav" className="z-20 bg-gray-800">
       {({ open }) => (
         <>
-          <div className="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
+          <div className="container px-2 mx-auto ">
             <div className="relative flex items-center justify-between h-16">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
@@ -59,12 +58,14 @@ const HeaderNav = () => {
               </div>
               <div className="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start">
                 <div className="flex items-center flex-shrink-0">
-                  <h1 className="font-bold text-white">ClassRoom</h1>
+                  <Link href="/" className="font-bold text-white">
+                    ClassRoom
+                  </Link>
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
-                      <a
+                      <Link
                         key={item.name}
                         href={item.href}
                         className={classNames(
@@ -76,7 +77,7 @@ const HeaderNav = () => {
                         aria-current={item.current ? "page" : undefined}
                       >
                         {item.name}
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 </div>

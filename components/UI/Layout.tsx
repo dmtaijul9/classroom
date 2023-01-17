@@ -7,7 +7,7 @@ const Layout = ({ children }: any) => {
     <section>
       <div className="flex flex-col justify-between min-h-screen">
         <Header />
-        <main className="min-h-[calc(100vh-30vh)]"> {children} </main>
+        <main className="min-h-[calc(100vh-20vh)]"> {children} </main>
         <Footer />
       </div>
     </section>

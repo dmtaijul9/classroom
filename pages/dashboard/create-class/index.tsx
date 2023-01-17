@@ -27,21 +27,29 @@ const index = () => {
     if (name.trim() === "" || subject.trim() === "") {
       toast.error("Field cannot be empty!");
     }
-    const variables = {
-      name,
-      subject,
+    try {
+      const variables = {
+        name,
+        subject,
+        //@ts-ignore
+        userId: session?.user?.id,
+      };
+      const res = await axios({
+        method: "POST",
+        url: "/api/createclass",
+        data: variables,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(res);
+      toast.success("Classroom created!");
+    } catch (error) {
       //@ts-ignore
-      userId: session?.user.id,
-    };
-    const res = await axios({
-      method: "POST",
-      url: "/api/createclass",
-      data: variables,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    console.log(res);
+      console.log(error);
+
+      toast.error(error.message);
+    }
   };
   return (
     <Layout>
