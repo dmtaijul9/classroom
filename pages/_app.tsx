@@ -3,6 +3,9 @@ import type { AppProps } from "next/app";
 import { SessionProvider } from "next-auth/react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { QueryClientProvider, QueryClient } from "react-query";
+
+const queryClient = new QueryClient();
 
 export default function App({
   Component,
@@ -10,8 +13,10 @@ export default function App({
 }: AppProps) {
   return (
     <SessionProvider session={session}>
-      <Component {...pageProps} />
-      <ToastContainer />
+      <QueryClientProvider client={queryClient}>
+        <Component {...pageProps} />
+        <ToastContainer />
+      </QueryClientProvider>
     </SessionProvider>
   );
 }

@@ -3,8 +3,16 @@ import React from "react";
 import { toast } from "react-toastify";
 import Layout from "../../components/UI/Layout";
 import { useForm } from "../../lib/useForm";
+import { useMutation } from "react-query";
 
 const SignUpPage = () => {
+  const signupMutation = useMutation((account) => {
+    return axios.post("/api/signup", account, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  });
   const { inputs, handleChange, clearForm } = useForm({
     name: "",
     email: "",
@@ -35,14 +43,8 @@ const SignUpPage = () => {
         role,
         password,
       };
-      const res = await axios({
-        url: "/api/signup",
-        method: "POST",
-        data: variables,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      //@ts-ignore
+      const res = await signupMutation.mutateAsync(variables);
       toast.success(res.data.message);
       console.log(res);
       clearForm();
