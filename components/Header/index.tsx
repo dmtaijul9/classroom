@@ -11,7 +11,6 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import Image from "next/image";
 
 const navigation = [
-  { name: "Dashboard", href: "/dashboard", current: false },
   { name: "My Class", href: "/dashboard/my-class", current: false },
   { name: "Contact", href: "/contact", current: false },
   { name: "About", href: "/about", current: false },

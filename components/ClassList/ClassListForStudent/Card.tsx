@@ -20,11 +20,6 @@ const Card = ({ item }: any) => {
 
       <div className="flex items-center justify-end mt-5 space-x-4">
         <div>
-          <button onClick={copyJoinCode}>
-            <FaCopy />
-          </button>
-        </div>
-        <div>
           <Link
             href={`/dashboard/my-class/${classroom.id}`}
             className="px-3 py-1 text-white bg-red-600 rounded-sm "
