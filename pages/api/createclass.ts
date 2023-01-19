@@ -36,5 +36,4 @@ export default async function handler(
       console.log(error);
     }
   }
-  res.status(200).json({ name: "John Doe" });
 }

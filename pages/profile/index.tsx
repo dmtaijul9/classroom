@@ -1,7 +1,7 @@
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import React from "react";
-import Layout from "../../../components/UI/Layout";
+import Layout from "../../components/UI/Layout";
 
 const ProfilePage = () => {
   const { data: session, status } = useSession();

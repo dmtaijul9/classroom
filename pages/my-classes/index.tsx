@@ -2,10 +2,10 @@ import axios from "axios";
 import { getSession, useSession } from "next-auth/react";
 import React from "react";
 import { useQuery } from "react-query";
-import ClassListForStudent from "../../../components/ClassList/ClassListForStudent";
-import ClassListForTeacher from "../../../components/ClassList/ClassListForTeacher";
-import Layout from "../../../components/UI/Layout";
-import prisma from "../../../lib/prisma";
+import ClassListForStudent from "../../components/ClassList/ClassListForStudent";
+import ClassListForTeacher from "../../components/ClassList/ClassListForTeacher";
+import Layout from "../../components/UI/Layout";
+import prisma from "../../lib/prisma";
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);

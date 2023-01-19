@@ -24,7 +24,7 @@ const Card = ({ item }: any) => {
         </div>
         <div>
           <Link
-            href={`/dashboard/my-class/${item.id}`}
+            href={`/my-classes/${item.id}`}
             className="px-3 py-1 text-white bg-red-600 rounded-sm "
           >
             Go to classroom

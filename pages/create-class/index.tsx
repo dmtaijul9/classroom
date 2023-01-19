@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useEffect } from "react";
-import Layout from "../../../components/UI/Layout";
-import { useForm } from "../../../lib/useForm";
+import Layout from "../../components/UI/Layout";
+import { useForm } from "../../lib/useForm";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";

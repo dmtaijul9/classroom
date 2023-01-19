@@ -11,7 +11,7 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import Image from "next/image";
 
 const navigation = [
-  { name: "My Class", href: "/dashboard/my-class", current: false },
+  { name: "My Class", href: "/my-classes", current: false },
   { name: "Contact", href: "/contact", current: false },
   { name: "About", href: "/about", current: false },
 ];
@@ -120,7 +120,7 @@ const HeaderNav = () => {
                       <Menu.Item>
                         {({ active }) => (
                           <Link
-                            href="/dashboard/join-class"
+                            href="/join-class"
                             className={classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
@@ -135,7 +135,7 @@ const HeaderNav = () => {
                         <Menu.Item>
                           {({ active }) => (
                             <Link
-                              href="/dashboard/create-class"
+                              href="/create-class"
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700"

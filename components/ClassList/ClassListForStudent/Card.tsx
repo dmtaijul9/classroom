@@ -21,7 +21,7 @@ const Card = ({ item }: any) => {
       <div className="flex items-center justify-end mt-5 space-x-4">
         <div>
           <Link
-            href={`/dashboard/my-class/${classroom.id}`}
+            href={`/my-classes/${classroom.id}`}
             className="px-3 py-1 text-white bg-red-600 rounded-sm "
           >
             Go to classroom
