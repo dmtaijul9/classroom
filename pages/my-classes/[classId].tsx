@@ -7,6 +7,7 @@ import { FaCommentAlt } from "react-icons/fa";
 import Notification from "../../components/Class/Notification";
 import Comments from "../../components/Class/Comments";
 import Quiz from "../../components/Class/Quiz";
+import { useRouter } from "next/router";
 
 export const getServerSideProps = async (context) => {
   const { classId } = context.params;
@@ -38,15 +39,25 @@ export const getServerSideProps = async (context) => {
 
 //@ts-ignore
 const SingleClassPage = ({ classroom }) => {
-  console.log(classroom);
+  const router = useRouter();
+
   const { data: session, status } = useSession();
   const { teacher, students, name, subject, notification, comments } =
     classroom;
 
   const isOwnerClass = session?.user.id === teacher.id;
-  console.log(isOwnerClass);
+
   const totalStudents = students.length;
-  console.log(notification);
+
+  const handleMeet = () => {
+    router.push({
+      pathname: `/meet/${name}`,
+      query: {
+        name: session?.user?.name,
+        email: session?.user?.email,
+      },
+    });
+  };
 
   return (
     <Layout>
@@ -70,15 +81,12 @@ const SingleClassPage = ({ classroom }) => {
             <h1> {subject} </h1>
           </div>
           <div>
-            {isOwnerClass ? (
-              <button className="px-5 py-1 bg-red-600 rounded-sm">
-                Create Online Class
-              </button>
-            ) : (
-              <button className="px-5 py-1 bg-red-600 rounded-sm">
-                Join Online Class
-              </button>
-            )}
+            <button
+              className="px-5 py-1 bg-red-600 rounded-sm"
+              onClick={handleMeet}
+            >
+              {isOwnerClass ? "Create Online Class" : "Join Online Class"}
+            </button>
           </div>
         </div>
         <div className="mt-5">

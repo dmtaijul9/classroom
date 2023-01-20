@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.notification ul {
+  @apply pl-4 list-disc;
+}
+.notification ol {
+  @apply pl-4 list-decimal;
+}
+
+.notification menu {
+  @apply pl-4 list-decimal;
+}

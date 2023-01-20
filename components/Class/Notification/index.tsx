@@ -58,7 +58,7 @@ const index = ({ notification, isOwnerClass }) => {
       </div>
       {notification ? (
         <div
-          className="p-5 min-h-[230px]"
+          className="p-5 min-h-[230px] notification"
           dangerouslySetInnerHTML={{ __html: message }}
         ></div>
       ) : (
