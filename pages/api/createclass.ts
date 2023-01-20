@@ -10,12 +10,19 @@ export default async function handler(
   if (req.method === "POST") {
     const { name, subject, userId } = req.body;
 
-    console.log(name, subject, userId);
     const joinCode = short.generate();
 
-    console.log(name);
     const created = await prisma.classRoom.create({
-      data: { name, subject, userId, joinCode },
+      data: {
+        name,
+        subject,
+        joinCode,
+        teacher: {
+          connect: {
+            id: userId,
+          },
+        },
+      },
     });
 
     if (!created) {
@@ -29,5 +36,4 @@ export default async function handler(
       console.log(error);
     }
   }
-  res.status(200).json({ name: "John Doe" });
 }

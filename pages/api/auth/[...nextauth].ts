@@ -71,7 +71,6 @@ export default NextAuth({
       session.user = token.user;
       //@ts-ignore
       session.accessToken = token.accessToken;
-      console.log(session);
 
       return session;
     },

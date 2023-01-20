@@ -11,8 +11,7 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import Image from "next/image";
 
 const navigation = [
-  { name: "Dashboard", href: "/dashboard", current: false },
-  { name: "My Class", href: "/dashboard/my-class", current: false },
+  { name: "My Class", href: "/my-classes", current: false },
   { name: "Contact", href: "/contact", current: false },
   { name: "About", href: "/about", current: false },
 ];
@@ -24,7 +23,6 @@ function classNames(...classes) {
 const HeaderNav = () => {
   const { data: session, status } = useSession();
   const [menuOpen, setMenuOpen] = useState(false);
-  console.log(session);
 
   const logoutHandler = async () => {
     try {
@@ -44,7 +42,7 @@ const HeaderNav = () => {
     <Disclosure as="nav" className="z-20 bg-gray-800">
       {({ open }) => (
         <>
-          <div className="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
+          <div className="container px-2 mx-auto ">
             <div className="relative flex items-center justify-between h-16">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
@@ -59,12 +57,14 @@ const HeaderNav = () => {
               </div>
               <div className="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start">
                 <div className="flex items-center flex-shrink-0">
-                  <h1 className="font-bold text-white">ClassRoom</h1>
+                  <Link href="/" className="font-bold text-white">
+                    ClassRoom
+                  </Link>
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
-                      <a
+                      <Link
                         key={item.name}
                         href={item.href}
                         className={classNames(
@@ -76,7 +76,7 @@ const HeaderNav = () => {
                         aria-current={item.current ? "page" : undefined}
                       >
                         {item.name}
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 </div>
@@ -120,7 +120,7 @@ const HeaderNav = () => {
                       <Menu.Item>
                         {({ active }) => (
                           <Link
-                            href="/dashboard/join-class"
+                            href="/join-class"
                             className={classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
@@ -135,7 +135,7 @@ const HeaderNav = () => {
                         <Menu.Item>
                           {({ active }) => (
                             <Link
-                              href="/dashboard/create-class"
+                              href="/create-class"
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700"

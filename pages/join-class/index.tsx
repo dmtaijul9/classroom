@@ -1,18 +1,17 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useEffect } from "react";
-import Layout from "../../../components/UI/Layout";
-import { useForm } from "../../../lib/useForm";
+import Layout from "../../components/UI/Layout";
+import { useForm } from "../../lib/useForm";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 
-const index = () => {
+const JoinClassPage = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
   const { inputs, handleChange } = useForm({
-    name: "",
-    subject: "",
+    joinCode: "",
   });
   useEffect(() => {
     if (!session) {
@@ -22,26 +21,36 @@ const index = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    console.log(inputs);
-    const { name, subject } = inputs;
-    if (name.trim() === "" || subject.trim() === "") {
+
+    const { joinCode } = inputs;
+    if (joinCode.trim() === "") {
       toast.error("Field cannot be empty!");
     }
-    const variables = {
-      name,
-      subject,
+    /*  if (session?.user.role !== "STUDENT") {
+      return toast.error("You can not join Any classes!");
+    } */
+    try {
+      const variables = {
+        joinCode,
+        //@ts-ignore
+        userId: session?.user.id,
+      };
+      console.log(variables);
+
+      const res = await axios({
+        method: "POST",
+        url: "/api/joinclass",
+        data: variables,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(res);
+      toast.success(res.data.message);
+    } catch (error) {
       //@ts-ignore
-      userId: session?.user.id,
-    };
-    const res = await axios({
-      method: "POST",
-      url: "/api/createclass",
-      data: variables,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    console.log(res);
+      toast.error(error?.response.data.message);
+    }
   };
   return (
     <Layout>
@@ -51,33 +60,22 @@ const index = () => {
             className="w-full px-6 py-8 text-black bg-gray-200 rounded shadow-md"
             onSubmit={handleSubmit}
           >
-            <h1 className="mb-8 text-3xl text-center">
-              Create a new classroom
-            </h1>
+            <h1 className="mb-8 text-3xl text-center">Join a classroom</h1>
             <input
               type="text"
               className="block w-full p-3 mb-4 border rounded border-grey-light"
-              name="name"
+              name="joinCode"
               required
-              value={inputs.name}
+              value={inputs.joinCode}
               onChange={handleChange}
-              placeholder="Class Name"
-            />
-            <input
-              type="text"
-              className="block w-full p-3 mb-4 border rounded border-grey-light"
-              name="subject"
-              required
-              value={inputs.subject}
-              onChange={handleChange}
-              placeholder="Class Subject"
+              placeholder="Join Code"
             />
 
             <button
               type="submit"
               className="w-full py-3 my-1 text-center text-white bg-purple-600 rounded bg-green hover:bg-green-dark focus:outline-none"
             >
-              Create Account
+              Join Class
             </button>
           </form>
         </div>
@@ -86,4 +84,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default JoinClassPage;
