@@ -25,6 +25,7 @@ export default async function handler(
         if (err) {
           throw new Error("Password not salted !");
         }
+
         bcrypt.hash(password, salt, async (err, hashed) => {
           if (err) {
             throw new Error("Password not hashed!");

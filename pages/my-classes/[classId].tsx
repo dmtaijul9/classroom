@@ -8,6 +8,7 @@ import Notification from "../../components/Class/Notification";
 import Comments from "../../components/Class/Comments";
 import Quiz from "../../components/Class/Quiz";
 import { useRouter } from "next/router";
+import Meterials from "../../components/Class/Meterials";
 
 export const getServerSideProps = async (context) => {
   const { classId } = context.params;
@@ -99,6 +100,7 @@ const SingleClassPage = ({ classroom }) => {
                 notification={notification}
                 isOwnerClass={isOwnerClass}
               />
+              <Meterials />
               <Quiz />
             </div>
             <div className="w-1/3">
