@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "@next/font/google";
 import Layout from "../components/UI/Layout";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,108 +16,134 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        <main>
-          <div className="bg-white isolate">
-            <div className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]">
-              <svg
-                className="relative left-[calc(50%-11rem)] -z-10 h-[21.1875rem] max-w-none -translate-x-1/2 rotate-[30deg] sm:left-[calc(50%-30rem)] sm:h-[42.375rem]"
-                viewBox="0 0 1155 678"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill="url(#45de2b6b-92d5-4d68-a6a0-9b9b2abad533)"
-                  fillOpacity=".3"
-                  d="M317.219 518.975L203.852 678 0 438.341l317.219 80.634 204.172-286.402c1.307 132.337 45.083 346.658 209.733 145.248C936.936 126.058 882.053-94.234 1031.02 41.331c119.18 108.451 130.68 295.337 121.53 375.223L855 299l21.173 362.054-558.954-142.079z"
-                />
-                <defs>
-                  <linearGradient
-                    id="45de2b6b-92d5-4d68-a6a0-9b9b2abad533"
-                    x1="1155.49"
-                    x2="-78.208"
-                    y1=".177"
-                    y2="474.645"
-                    gradientUnits="userSpaceOnUse"
+        <section className="py-20">
+          <div className="z-20 px-6 py-12 text-center text-gray-800 lg:my-12 md:px-12 lg:text-left">
+            <div className="container mx-auto xl:px-32">
+              <div className="flex grid items-center gap-12 lg:grid-cols-2">
+                <div className="mt-12 lg:mt-0">
+                  <h1 className="mb-12 text-5xl font-bold tracking-tight md:text-6xl xl:text-7xl">
+                    Online Classroom <br />
+                    <span className="text-blue-600">Service</span>
+                  </h1>
+                  <Link
+                    className="inline-block py-3 mr-2 text-sm font-medium leading-snug text-white uppercase transition duration-150 ease-in-out bg-blue-600 rounded shadow-md px-7 hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg"
+                    href="/login"
                   >
-                    <stop stopColor="#9089FC"></stop>
-                    <stop offset="1" stopColor="#FF80B5"></stop>
-                  </linearGradient>
-                </defs>
-              </svg>
-            </div>
-
-            <main>
-              <div className="relative px-6 lg:px-8">
-                <div className="max-w-3xl pt-20 pb-32 mx-auto sm:pt-48 sm:pb-40">
-                  <div>
-                    <div className="hidden sm:mb-8 sm:flex sm:justify-center">
-                      {/* <div className="relative overflow-hidden rounded-full py-1.5 px-4 text-sm leading-6 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-                      <span className="text-gray-600">
-                        Announcing our next round of funding.{" "}
-                        <a href="#" className="font-semibold text-indigo-600">
-                          <span
-                            className="absolute inset-0"
-                            aria-hidden="true"
-                          ></span>
-                          Read more <span aria-hidden="true">&rarr;</span>
-                        </a>
-                      </span>
-                    </div> */}
-                    </div>
-                    <div>
-                      <h1 className="text-4xl font-bold tracking-tight sm:text-center sm:text-6xl">
-                        Online Classroom Service
-                      </h1>
-                      <p className="mt-6 text-lg leading-8 text-gray-600 sm:text-center">
-                        Anim aute id magna aliqua ad ad non deserunt sunt. Qui
-                        irure qui lorem cupidatat commodo. Elit sunt amet fugiat
-                        veniam occaecat fugiat aliqua.
-                      </p>
-                      <div className="flex mt-8 gap-x-4 sm:justify-center">
-                        <a
-                          href="#"
-                          className="inline-block rounded-lg bg-indigo-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-indigo-600 hover:bg-indigo-700 hover:ring-indigo-700"
-                        >
-                          Get started
-                          <span className="text-indigo-200" aria-hidden="true">
-                            &rarr;
-                          </span>
-                        </a>
-                      </div>
-                    </div>
-                    <div className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">
-                      <svg
-                        className="relative left-[calc(50%+3rem)] h-[21.1875rem] max-w-none -translate-x-1/2 sm:left-[calc(50%+36rem)] sm:h-[42.375rem]"
-                        viewBox="0 0 1155 678"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          fill="url(#ecb5b0c9-546c-4772-8c71-4d3f06d544bc)"
-                          fillOpacity=".3"
-                          d="M317.219 518.975L203.852 678 0 438.341l317.219 80.634 204.172-286.402c1.307 132.337 45.083 346.658 209.733 145.248C936.936 126.058 882.053-94.234 1031.02 41.331c119.18 108.451 130.68 295.337 121.53 375.223L855 299l21.173 362.054-558.954-142.079z"
-                        />
-                        <defs>
-                          <linearGradient
-                            id="ecb5b0c9-546c-4772-8c71-4d3f06d544bc"
-                            x1="1155.49"
-                            x2="-78.208"
-                            y1=".177"
-                            y2="474.645"
-                            gradientUnits="userSpaceOnUse"
-                          >
-                            <stop stopColor="#9089FC"></stop>
-                            <stop offset="1" stopColor="#FF80B5"></stop>
-                          </linearGradient>
-                        </defs>
-                      </svg>
-                    </div>
-                  </div>
+                    Get started
+                  </Link>
+                  <Link
+                    className="inline-block py-3 text-sm font-medium leading-snug text-blue-600 uppercase transition duration-150 ease-in-out bg-transparent rounded px-7 hover:text-blue-700 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none focus:ring-0 active:bg-gray-200"
+                    data-mdb-ripple="true"
+                    data-mdb-ripple-color="light"
+                    href="#!"
+                  >
+                    Learn more
+                  </Link>
+                </div>
+                <div className="mb-12 lg:mb-0">
+                  <Image
+                    src="/img/teacher-class.jpg"
+                    className="w-full rounded-lg "
+                    alt=""
+                    width={500}
+                    height={500}
+                  />
                 </div>
               </div>
-            </main>
+            </div>
           </div>
-        </main>
+        </section>
+        <section className="w-full bg-gray-200 pt-7 pb-7 md:pt-20 md:pb-24">
+          <div className="container box-border flex flex-col items-center content-center px-8 mx-auto leading-6 text-black border-0 border-gray-300 border-solid md:flex-row ">
+            {/*         <!-- Image --> */}
+            <div className="box-border relative w-full max-w-md px-4 mt-5 mb-4 -ml-5 text-center bg-no-repeat bg-contain border-solid md:ml-0 md:mt-0 md:max-w-none lg:mb-0 md:w-1/2 xl:pl-10">
+              <Image
+                src="/img/readme-img1.png"
+                alt="image"
+                className="p-2 pl-6 pr-5 xl:pl-16 xl:pr-20 "
+                width={500}
+                height={500}
+              />
+            </div>
+
+            {/*    <!-- Content --> */}
+            <div className="box-border order-first w-full text-black border-solid md:w-1/2 md:pl-10 md:order-none">
+              <h2 className="m-0 text-xl font-semibold leading-tight border-0 border-gray-300 lg:text-3xl md:text-2xl">
+                Online Meeting
+              </h2>
+              <p className="pt-4 pb-8 m-0 leading-7 text-gray-700 border-0 border-gray-300 sm:pr-12 xl:pr-32 lg:text-lg">
+                Build an atmosphere that creates productivity in your
+                organization and your company culture.
+              </p>
+              <ul className="p-0 m-0 leading-6 border-0 border-gray-300">
+                <li className="box-border relative py-1 pl-0 text-left text-gray-500 border-solid">
+                  <span className="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-yellow-300 rounded-full">
+                    <span className="text-sm font-bold">✓</span>
+                  </span>{" "}
+                  Maximize productivity and growth
+                </li>
+                <li className="box-border relative py-1 pl-0 text-left text-gray-500 border-solid">
+                  <span className="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-yellow-300 rounded-full">
+                    <span className="text-sm font-bold">✓</span>
+                  </span>{" "}
+                  Speed past your competition
+                </li>
+                <li className="box-border relative py-1 pl-0 text-left text-gray-500 border-solid">
+                  <span className="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-yellow-300 rounded-full">
+                    <span className="text-sm font-bold">✓</span>
+                  </span>{" "}
+                  Learn the top techniques
+                </li>
+              </ul>
+            </div>
+            {/*       <!-- End  Content --> */}
+          </div>
+          <div className="container box-border flex flex-col items-center content-center px-8 mx-auto mt-2 leading-6 text-black border-0 border-gray-300 border-solid md:mt-20 xl:mt-0 md:flex-row">
+            {/* 
+        <!-- Content --> */}
+            <div className="box-border w-full text-black border-solid md:w-1/2 md:pl-6 xl:pl-32">
+              <h2 className="m-0 text-xl font-semibold leading-tight border-0 border-gray-300 lg:text-3xl md:text-2xl">
+                Automated Tasks
+              </h2>
+              <p className="pt-4 pb-8 m-0 leading-7 text-gray-700 border-0 border-gray-300 sm:pr-10 lg:text-lg">
+                Save time and money with our revolutionary services. We are the
+                leaders in the industry.
+              </p>
+              <ul className="p-0 m-0 leading-6 border-0 border-gray-300">
+                <li className="box-border relative py-1 pl-0 text-left text-gray-500 border-solid">
+                  <span className="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-yellow-300 rounded-full">
+                    <span className="text-sm font-bold">✓</span>
+                  </span>{" "}
+                  Automated task management workflow
+                </li>
+                <li className="box-border relative py-1 pl-0 text-left text-gray-500 border-solid">
+                  <span className="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-yellow-300 rounded-full">
+                    <span className="text-sm font-bold">✓</span>
+                  </span>{" "}
+                  Detailed analytics for your data
+                </li>
+                <li className="box-border relative py-1 pl-0 text-left text-gray-500 border-solid">
+                  <span className="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-yellow-300 rounded-full">
+                    <span className="text-sm font-bold">✓</span>
+                  </span>{" "}
+                  Some awesome integrations
+                </li>
+              </ul>
+            </div>
+            {/*         <!-- End  Content -->
+
+        <!-- Image --> */}
+            <div className="box-border relative w-full max-w-md px-4 mt-10 mb-4 text-center bg-no-repeat bg-contain border-solid md:mt-0 md:max-w-none lg:mb-0 md:w-1/2">
+              <Image
+                src="/img/otebook-and-pen-png-notebook-with-pen-115636115161h6kvvg4bv.png"
+                alt="image"
+                className="p-2 pl-6 pr-5 xl:pl-16 xl:pr-20 "
+                width={500}
+                height={500}
+              />
+            </div>
+          </div>
+        </section>
       </Layout>
     </>
   );

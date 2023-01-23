@@ -10,14 +10,14 @@ export const Editor: React.FC<EditorProps> = ({ onChange }) => {
 
   const onChangeEditorHandler = (newValue) => {
     setValue(newValue);
-    console.log(value.toString("html"));
+
     onChange(value.toString("html"));
   };
   return (
     <RichTextEditor
       onChange={onChangeEditorHandler}
       value={value}
-      className="min-h-[200px]"
+      className="min-h-[500px]"
     />
   );
 };

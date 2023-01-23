@@ -50,7 +50,7 @@ export async function getServerSideProps(context) {
 const MyClassListPage = ({ classroom }: any) => {
   const { data: session, status } = useSession();
 
-  const isTeacher = session?.user.role === "TEACHER";
+  const isTeacher = session?.user?.role === "TEACHER";
 
   console.log(classroom);
 
