@@ -36,10 +36,10 @@ const HeaderNav = () => {
   //@ts-ignore
   const isTeacher = session?.user.role === "TEACHER";
   //@ts-ignore
-  const isStudent = session?.user.role === "STUDENTS";
+  const isStudent = session?.user.role === "STUDENT";
 
   return (
-    <Disclosure as="nav" className="z-20 bg-gray-800">
+    <Disclosure as="nav" className="text-gray-900 bg-gray-200 shadow-md">
       {({ open }) => (
         <>
           <div className="container px-2 mx-auto ">
@@ -57,98 +57,107 @@ const HeaderNav = () => {
               </div>
               <div className="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start">
                 <div className="flex items-center flex-shrink-0">
-                  <Link href="/" className="font-bold text-white">
+                  <Link href="/" className="font-bold text-blue-700 uppercase">
                     ClassRoom
                   </Link>
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
-                    {navigation.map((item) => (
+                    <Link
+                      href="/my-classes"
+                      className={classNames(
+                        "    hover:text-gray-500",
+                        "px-3 py-2 rounded-md text-sm font-medium"
+                      )}
+                    >
+                      My Classes
+                    </Link>
+                    {isStudent && (
                       <Link
-                        key={item.name}
-                        href={item.href}
+                        href="/notes"
                         className={classNames(
-                          item.current
-                            ? "bg-gray-900 text-white"
-                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                          " hover:text-gray-500",
                           "px-3 py-2 rounded-md text-sm font-medium"
                         )}
-                        aria-current={item.current ? "page" : undefined}
                       >
-                        {item.name}
+                        My Notes
                       </Link>
-                    ))}
+                    )}
                   </div>
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <Menu as="div" className="relative mr-2">
-                  <div>
-                    <Menu.Button className="flex text-white bg-gray-800 rounded-full focus:outline-none ">
-                      <span className="sr-only">Create Or Join Class</span>
-                      <AiOutlinePlusSquare
-                        className="w-6 h-6"
-                        aria-hidden="true"
-                      />
-                    </Menu.Button>
-                  </div>
-                  <Transition
-                    as={Fragment}
-                    enter="transition ease-out duration-100"
-                    enterFrom="transform opacity-0 scale-95"
-                    enterTo="transform opacity-100 scale-100"
-                    leave="transition ease-in duration-75"
-                    leaveFrom="transform opacity-100 scale-100"
-                    leaveTo="transform opacity-0 scale-95"
-                  >
-                    <Menu.Items className="absolute right-0 z-10 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      {isAdmin && (
-                        <Menu.Item>
-                          {({ active }) => (
-                            <Link
-                              href="/signup"
-                              className={classNames(
-                                active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700"
-                              )}
-                            >
-                              Create Account
-                            </Link>
-                          )}
-                        </Menu.Item>
-                      )}
-                      <Menu.Item>
-                        {({ active }) => (
-                          <Link
-                            href="/join-class"
-                            className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
+                {status === "authenticated" && (
+                  <Menu as="div" className="relative mr-2">
+                    <div>
+                      <Menu.Button className="flex rounded-full focus:outline-none ">
+                        <span className="sr-only">Create Or Join Class</span>
+                        <AiOutlinePlusSquare
+                          className="w-6 h-6"
+                          aria-hidden="true"
+                        />
+                      </Menu.Button>
+                    </div>
+                    <Transition
+                      as={Fragment}
+                      enter="transition ease-out duration-100"
+                      enterFrom="transform opacity-0 scale-95"
+                      enterTo="transform opacity-100 scale-100"
+                      leave="transition ease-in duration-75"
+                      leaveFrom="transform opacity-100 scale-100"
+                      leaveTo="transform opacity-0 scale-95"
+                    >
+                      <Menu.Items className="absolute right-0 z-10 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        {isAdmin && (
+                          <Menu.Item>
+                            {({ active }) => (
+                              <Link
+                                href="/signup"
+                                className={classNames(
+                                  active ? "bg-gray-100" : "",
+                                  "block px-4 py-2 text-sm text-gray-700"
+                                )}
+                              >
+                                Create Account
+                              </Link>
                             )}
-                          >
-                            Join Class
-                          </Link>
+                          </Menu.Item>
                         )}
-                      </Menu.Item>
+                        {isStudent || isTeacher ? (
+                          <Menu.Item>
+                            {({ active }) => (
+                              <Link
+                                href="/join-class"
+                                className={classNames(
+                                  active ? "bg-gray-100" : "",
+                                  "block px-4 py-2 text-sm text-gray-700"
+                                )}
+                              >
+                                Join Class
+                              </Link>
+                            )}
+                          </Menu.Item>
+                        ) : null}
 
-                      {isTeacher && (
-                        <Menu.Item>
-                          {({ active }) => (
-                            <Link
-                              href="/create-class"
-                              className={classNames(
-                                active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700"
-                              )}
-                            >
-                              Create Class
-                            </Link>
-                          )}
-                        </Menu.Item>
-                      )}
-                    </Menu.Items>
-                  </Transition>
-                </Menu>
+                        {isTeacher && (
+                          <Menu.Item>
+                            {({ active }) => (
+                              <Link
+                                href="/create-class"
+                                className={classNames(
+                                  active ? "bg-gray-100" : "",
+                                  "block px-4 py-2 text-sm text-gray-700"
+                                )}
+                              >
+                                Create Class
+                              </Link>
+                            )}
+                          </Menu.Item>
+                        )}
+                      </Menu.Items>
+                    </Transition>
+                  </Menu>
+                )}
 
                 {/* Profile dropdown */}
                 {session?.user ? (
@@ -195,7 +204,7 @@ const HeaderNav = () => {
                         <Menu.Item>
                           {({ active }) => (
                             <Link
-                              href="/dashboard/profile"
+                              href="/profile"
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700"
@@ -225,7 +234,7 @@ const HeaderNav = () => {
                 ) : (
                   <Link
                     href="/login"
-                    className="p-1 font-semibold text-white uppercase rounded-full focus:outline-none focus:ring-2 "
+                    className="p-1 font-semibold uppercase rounded-full focus:outline-none "
                   >
                     <span className="sr-only">Create Or Join Class</span>
                     Login
