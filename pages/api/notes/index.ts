@@ -25,7 +25,7 @@ export default async function handler(
       throw new Error("Creating Failed !");
     }
   } else if (req.method === "GET") {
-    const { studentId } = req.query;
+    const { page, studentId } = req.query;
 
     try {
       const notes = await prisma.note.findMany({
@@ -42,7 +42,9 @@ export default async function handler(
       }
       throw new Error("Something is wrong!");
     } catch (error) {
-      throw new Error("Something is wrong!");
+      res.status(501).json({
+        message: "Something is wrong!",
+      });
     }
   }
 }

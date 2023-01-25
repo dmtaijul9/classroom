@@ -32,7 +32,6 @@ const index = ({ notification, isOwnerClass }) => {
     const variables = {
       notification: newNotification,
     };
-    console.log(variables);
 
     try {
       const res = await axios({
@@ -49,7 +48,6 @@ const index = ({ notification, isOwnerClass }) => {
       return toast.error("Something is wrong!");
     }
   };
-  console.log(message);
 
   return (
     <div className="border rounded-b-sm shadow-sm">

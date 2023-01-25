@@ -91,6 +91,7 @@ const SignUpPage = () => {
               <option value="">Select a type</option>
 
               <option value="STUDENT">Student</option>
+              <option value="ADMIN">Admin</option>
               <option value="TEACHER">Teacher</option>
             </select>
 
