@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
@@ -6,7 +7,7 @@ import { FaCommentAlt } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { useForm } from "../../../lib/useForm";
 
-const index = ({ comments }) => {
+const index = ({ comments, refetch }: any) => {
   const { data: session, status } = useSession();
   console.log(comments);
 
@@ -41,13 +42,14 @@ const index = ({ comments }) => {
       });
       console.log(res);
       toast.success("Message Successfull!");
+      refetch();
       clearForm();
     } catch (error) {
       return toast.error("Something is wrong!");
     }
   };
 
-  const hasComments = comments.length > 0;
+  const hasComments = comments?.length > 0;
   return (
     <div className="border rounded-b-sm shadow-sm ">
       <div className="px-3 py-3 text-white bg-gray-700">
@@ -58,10 +60,10 @@ const index = ({ comments }) => {
           <div className="flex flex-col space-y-3 overflow-y-auto">
             {comments.map((comment: any) => {
               return (
-                <div key={comment.id} className="pb-3 border-b">
+                <div key={comment?.id} className="pb-3 border-b">
                   <p>
-                    <span className="font-medium"> {comment.name} :</span>{" "}
-                    {comment.message}
+                    <span className="font-medium"> {comment?.name} :</span>{" "}
+                    {comment?.message}
                   </p>
                 </div>
               );

@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import Layout from "../../../components/UI/Layout";
 import { useForm } from "../../../lib/useForm";
 
-const resetPassword = (passAndToken) => {
+export const resetPassword = (passAndToken) => {
   return axios.post("/api/reset", passAndToken, {
     headers: {
       "Content-Type": "application/json",

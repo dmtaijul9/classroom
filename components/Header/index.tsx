@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { Popover } from "@headlessui/react";
 import { AiOutlinePlusSquare } from "react-icons/ai";
@@ -9,6 +9,8 @@ import { HiXMark, HiBars3 } from "react-icons/hi2";
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import Image from "next/image";
+import { BiUserCircle } from "react-icons/bi";
+import { useRouter } from "next/router";
 
 const navigation = [
   { name: "My Class", href: "/my-classes", current: false },
@@ -21,8 +23,11 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 const HeaderNav = () => {
+  const router = useRouter();
+
   const { data: session, status } = useSession();
-  const [menuOpen, setMenuOpen] = useState(false);
+
+  const [role, setRole] = useState("");
 
   const logoutHandler = async () => {
     try {
@@ -58,20 +63,22 @@ const HeaderNav = () => {
               <div className="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start">
                 <div className="flex items-center flex-shrink-0">
                   <Link href="/" className="font-bold text-blue-700 uppercase">
-                    ClassRoom
+                    ELMA
                   </Link>
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
-                    <Link
-                      href="/my-classes"
-                      className={classNames(
-                        "    hover:text-gray-500",
-                        "px-3 py-2 rounded-md text-sm font-medium"
-                      )}
-                    >
-                      My Classes
-                    </Link>
+                    {isTeacher || isStudent ? (
+                      <Link
+                        href="/my-classes"
+                        className={classNames(
+                          "    hover:text-gray-500",
+                          "px-3 py-2 rounded-md text-sm font-medium"
+                        )}
+                      >
+                        My Classes
+                      </Link>
+                    ) : null}
                     {isStudent && (
                       <Link
                         href="/notes"
@@ -81,6 +88,17 @@ const HeaderNav = () => {
                         )}
                       >
                         My Notes
+                      </Link>
+                    )}
+                    {isAdmin && (
+                      <Link
+                        href="/dashboard/user-management"
+                        className={classNames(
+                          " hover:text-gray-500",
+                          "px-3 py-2 rounded-md text-sm font-medium"
+                        )}
+                      >
+                        User Management
                       </Link>
                     )}
                   </div>
@@ -166,17 +184,23 @@ const HeaderNav = () => {
                       <Menu.Button className="flex text-white bg-gray-800 rounded-full focus:outline-none ">
                         <span className="sr-only">Open user menu</span>
 
-                        <Image
-                          src={
-                            session?.user.image
-                              ? session.user.image
-                              : "/img/user_placeholder.png"
-                          }
-                          className="w-8 h-8 rounded-full"
-                          alt=""
-                          width={200}
-                          height={200}
-                        />
+                        {session?.user.image ? (
+                          <Image
+                            src={
+                              session?.user.image
+                                ? session.user.image
+                                : "/img/user_placeholder.png"
+                            }
+                            className="w-8 h-8 rounded-full"
+                            alt=""
+                            width={200}
+                            height={200}
+                          />
+                        ) : (
+                          <div className="flex items-center justify-center w-8 h-8 rounded-full">
+                            <BiUserCircle size={25} />
+                          </div>
+                        )}
                       </Menu.Button>
                     </div>
                     <Transition
