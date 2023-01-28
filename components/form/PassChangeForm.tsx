@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { useForm } from "../../lib/useForm";
 import { resetPassword } from "../../pages/reset/[resetToken]";
 
-const PassChangeForm = ({ selectedRowData }: any) => {
+const PassChangeForm = ({ selectedRowData, isProfile }: any) => {
   console.log(selectedRowData);
 
   const { inputs, handleChange } = useForm({
@@ -39,12 +39,14 @@ const PassChangeForm = ({ selectedRowData }: any) => {
   };
   return (
     <>
-      <div className="flex items-center justify-center space-x-3">
-        <div className="flex text-white items-center justify-center w-[40px] h-[40px] rounded-full bg-gray-400">
-          <BiUserCircle size={30} />
+      {!isProfile && (
+        <div className="flex items-center justify-center space-x-3">
+          <div className="flex text-white items-center justify-center w-[40px] h-[40px] rounded-full bg-gray-400">
+            <BiUserCircle size={30} />
+          </div>
+          <p className="text-[20px]">{selectedRowData?.name}</p>
         </div>
-        <p className="text-[20px]">{selectedRowData?.name}</p>
-      </div>
+      )}
       <form
         className="flex flex-col min-w-[300px] mt-4 "
         onSubmit={changePassword}

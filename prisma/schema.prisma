@@ -6,9 +6,8 @@ generator client {
 }
 
 datasource db {
-  provider          = "mysql"
-  url               = env("DATABASE_URL")
-  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+  provider = "mysql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -42,6 +41,7 @@ model ClassRoom {
   userId       String?
   students     ClassroomWithUsers[]
   comments     Comment[]
+  meterials    Meterial[]
 }
 
 model Note {
@@ -56,6 +56,15 @@ model Comment {
   id          String     @id @default(uuid())
   name        String
   message     String
+  ClassRoom   ClassRoom? @relation(fields: [classRoomId], references: [id])
+  classRoomId String?
+}
+
+model Meterial {
+  id          String     @id @default(uuid())
+  fileName    String
+  filePath    String
+  fileType    String
   ClassRoom   ClassRoom? @relation(fields: [classRoomId], references: [id])
   classRoomId String?
 }

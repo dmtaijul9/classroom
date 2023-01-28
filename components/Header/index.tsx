@@ -91,15 +91,26 @@ const HeaderNav = () => {
                       </Link>
                     )}
                     {isAdmin && (
-                      <Link
-                        href="/dashboard/user-management"
-                        className={classNames(
-                          " hover:text-gray-500",
-                          "px-3 py-2 rounded-md text-sm font-medium"
-                        )}
-                      >
-                        User Management
-                      </Link>
+                      <>
+                        <Link
+                          href="/dashboard/user-management"
+                          className={classNames(
+                            " hover:text-gray-500",
+                            "px-3 py-2 rounded-md text-sm font-medium"
+                          )}
+                        >
+                          User Management
+                        </Link>
+                        <Link
+                          href="/signup"
+                          className={classNames(
+                            " hover:text-gray-500",
+                            "px-3 py-2 rounded-md text-sm font-medium"
+                          )}
+                        >
+                          Create User
+                        </Link>
+                      </>
                     )}
                   </div>
                 </div>

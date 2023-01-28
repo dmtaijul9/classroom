@@ -51,7 +51,7 @@ const UserManagementPage = () => {
   if (isLoading) {
     return (
       <Layout>
-        <div>Loading...</div>
+        <div className="container m-auto">Loading...</div>
       </Layout>
     );
   }

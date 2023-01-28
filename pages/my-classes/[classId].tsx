@@ -1,7 +1,6 @@
 import { useSession } from "next-auth/react";
 import React from "react";
 import Layout from "../../components/UI/Layout";
-import prisma from "../../lib/prisma";
 import Notification from "../../components/Class/Notification";
 import Comments from "../../components/Class/Comments";
 import Quiz from "../../components/Class/Quiz";
@@ -10,7 +9,7 @@ import Meterials from "../../components/Class/Meterials";
 import axios from "axios";
 import { useQuery } from "react-query";
 
-const getClassroomData = (classId) => {
+const getClassroomData = (classId: any) => {
   return axios.get(`/api/classroom/single/${classId}`);
 };
 //@ts-ignore
@@ -19,7 +18,7 @@ const SingleClassPage = () => {
 
   const { classId } = router.query;
 
-  const { data: session, status } = useSession();
+  const { data: session, status }: any = useSession();
 
   const { data, isLoading, isError, refetch } = useQuery(
     ["singleClass", classId],
@@ -52,8 +51,6 @@ const SingleClassPage = () => {
       },
     });
   };
-
-  console.log(classroom);
 
   return (
     <Layout>
@@ -89,16 +86,19 @@ const SingleClassPage = () => {
           <div className="py-3 border-b">
             <h1 className="font-medium uppercase">All Classwork</h1>
           </div>
-          <div className="flex mt-10 space-x-5">
-            <div className="w-2/3">
+          <div className="flex flex-col mt-10 space-y-5 md:space-x-5 md:space-y-0 md:flex-row">
+            <div className="w-full md:w-2/3">
               <Notification
                 notification={classroom?.notification}
                 isOwnerClass={isOwnerClass}
               />
-              <Meterials />
+              <Meterials
+                classId={classroom?.id}
+                meterials={classroom?.meterials}
+              />
               <Quiz />
             </div>
-            <div className="w-1/3">
+            <div className="w-full md:w-1/3">
               <Comments comments={classroom?.comments} refetch={refetch} />
             </div>
           </div>

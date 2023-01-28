@@ -38,6 +38,9 @@ export default async function handler(
           };
           try {
             const createdUser = await prisma.user.create({ data: variables });
+            console.log("Hello");
+            console.log(createdUser);
+
             res.status(200).json({
               message: "Account created successfully!",
               user: createdUser,
