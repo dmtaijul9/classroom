@@ -18,4 +18,26 @@ export default async function handler(
       users: allUsers,
     });
   }
+  if (req.method === "POST") {
+    const userId = req.body;
+
+    try {
+      console.log("I am dong");
+
+      const deletedUser = await prisma.user.delete({ where: { id: userId } });
+      console.log(deletedUser);
+
+      if (!deletedUser) {
+        throw new Error("Something went wrong");
+      }
+      res.status(200).json({
+        message: "Success",
+      });
+    } catch (error) {
+      res.status(500).json({
+        message: "Something went wrong!",
+        error,
+      });
+    }
+  }
 }

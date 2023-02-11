@@ -1,52 +1,68 @@
 import axios from "axios";
-import Image from "next/image";
+
 import React, { useState, useEffect } from "react";
 
-import { BiSearch, BiUserCircle } from "react-icons/bi";
-
 import { useRouter } from "next/router";
-import { toast } from "react-toastify";
-
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 import { useSession } from "next-auth/react";
 import Layout from "../../../components/UI/Layout";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import UserTableRaw from "../../../components/Table/UserTableRaw";
 import PassChangeForm from "../../../components/form/PassChangeForm";
+import { toast } from "react-toastify";
 
 const fetchUsers = () => {
   return axios.get("/api/users");
 };
 
+const deleteUser = ({ userId }) => {
+  return axios.post("/api/users", userId, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
+
 const UserManagementPage = () => {
   const [selectedRowData, setSelecetedRowData] = useState(null);
-  const [current, setCurrent] = useState(1);
+
   const router = useRouter();
 
   const { data: session, status } = useSession();
-  const [search, setSearch] = useState("");
 
   const isAdmin = session?.user?.role === "ADMIN";
 
   useEffect(() => {
-    if (status === "authenticated") {
-      if (!isAdmin) {
+    if (status === "unauthenticated") {
+      router.push("/");
+    } else if (status === "authenticated") {
+      if (session?.user?.role !== "ADMIN") {
         router.push("/");
       }
     }
   });
 
-  // Pagination is not implemented yet
+  const { data, isLoading, refetch } = useQuery("Users", fetchUsers);
+  const { mutate } = useMutation(deleteUser);
 
-  const paginate = (page: number, pageSize: number) => {
-    return setCurrent(page);
+  const deleteUserHandler = (id) => {
+    mutate(
+      { userId: id },
+      {
+        onSuccess: async (data) => {
+          toast.success("Successfully deleted");
+          refetch();
+        },
+        onError: async (err) => {
+          toast.error("Something went wrong");
+        },
+      }
+    );
   };
 
   const onSelectHandler = (user) => {
     setSelecetedRowData(user);
   };
-  const { data, isLoading } = useQuery("Users", fetchUsers);
 
   if (isLoading) {
     return (
@@ -78,6 +94,9 @@ const UserManagementPage = () => {
                   <th className="p-3 font-bold text-white uppercase bg-blue-600 border border-gray-300 lg:table-cell">
                     Role
                   </th>
+                  <th className="p-3 font-bold text-white uppercase bg-blue-600 border border-gray-300 lg:table-cell">
+                    Action
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -87,40 +106,12 @@ const UserManagementPage = () => {
                       key={user.id}
                       user={user}
                       onSelectHandler={onSelectHandler}
+                      deleteUserHandler={deleteUserHandler}
                     />
                   );
                 })}
               </tbody>
             </table>
-            {/*  <div className="flex self-end mt-6 justify-between w-[150px]">
-              <button
-                className="flex items-center justify-center w-10 h-10 transition-colors ease-linear bg-white border hover:bg-slate-200"
-                onClick={() => {
-                  if (current <= 0) {
-                    return;
-                  }
-                  setCurrent(current - 1);
-                }}
-              >
-                {" "}
-                <FaChevronLeft />{" "}
-              </button>
-              <div className="flex items-center justify-center w-10 h-10 bg-white border">
-                {current}
-              </div>
-              <button
-                className="flex items-center justify-center w-10 h-10 transition-colors ease-linear bg-white border hover:bg-slate-200"
-                onClick={() => {
-                  if (current <= 0) {
-                    return;
-                  }
-                  setCurrent(current - 1);
-                }}
-              >
-                {" "}
-                <FaChevronRight />{" "}
-              </button>
-            </div> */}
           </div>
         </div>
         <div className="flex flex-col items-center order-1 w-1/3 my-16 lg:my-0 lg:order-2">

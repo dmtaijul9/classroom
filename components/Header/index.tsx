@@ -60,20 +60,38 @@ const HeaderNav = () => {
                   )}
                 </Disclosure.Button>
               </div>
-              <div className="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start">
+              <div className="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start ">
                 <div className="flex items-center flex-shrink-0">
                   <Link href="/" className="font-bold text-blue-700 uppercase">
                     ELMA
                   </Link>
                 </div>
-                <div className="hidden sm:ml-6 sm:block">
+                <div className="hidden font-semibold sm:ml-6 sm:block">
                   <div className="flex space-x-4">
+                    <Link
+                      href="/"
+                      className={classNames(
+                        "    hover:text-gray-500",
+                        "px-3 py-2 rounded-md text-sm font-bold"
+                      )}
+                    >
+                      About Us
+                    </Link>
+                    <Link
+                      href="/"
+                      className={classNames(
+                        "    hover:text-gray-500",
+                        "px-3 py-2 rounded-md text-sm font-bold"
+                      )}
+                    >
+                      Contact Us
+                    </Link>
                     {isTeacher || isStudent ? (
                       <Link
                         href="/my-classes"
                         className={classNames(
                           "    hover:text-gray-500",
-                          "px-3 py-2 rounded-md text-sm font-medium"
+                          "px-3 py-2 rounded-md text-sm font-bold"
                         )}
                       >
                         My Classes
@@ -84,7 +102,7 @@ const HeaderNav = () => {
                         href="/notes"
                         className={classNames(
                           " hover:text-gray-500",
-                          "px-3 py-2 rounded-md text-sm font-medium"
+                          "px-3 py-2 rounded-md text-sm font-bold"
                         )}
                       >
                         My Notes
@@ -96,7 +114,7 @@ const HeaderNav = () => {
                           href="/dashboard/user-management"
                           className={classNames(
                             " hover:text-gray-500",
-                            "px-3 py-2 rounded-md text-sm font-medium"
+                            "px-3 py-2 rounded-md text-sm font-bold"
                           )}
                         >
                           User Management
@@ -105,7 +123,7 @@ const HeaderNav = () => {
                           href="/signup"
                           className={classNames(
                             " hover:text-gray-500",
-                            "px-3 py-2 rounded-md text-sm font-medium"
+                            "px-3 py-2 rounded-md text-sm font-bold"
                           )}
                         >
                           Create User
@@ -290,7 +308,7 @@ const HeaderNav = () => {
                     item.current
                       ? "bg-gray-900 text-white"
                       : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                    "block px-3 py-2 rounded-md text-base font-medium"
+                    "block px-3 py-2 rounded-md text-base font-bold"
                   )}
                   aria-current={item.current ? "page" : undefined}
                 >

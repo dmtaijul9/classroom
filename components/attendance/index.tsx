@@ -1,4 +1,5 @@
 import axios from "axios";
+import Link from "next/link";
 import React, { useState } from "react";
 import { useMutation } from "react-query";
 import { toast } from "react-toastify";
@@ -52,7 +53,8 @@ const Attendance = ({ attendance, classId }: any) => {
         <div className="min-h-[100px] p-4">
           {attendance?.map((item: any) => {
             return (
-              <div
+              <Link
+                href={`/my-classes/attendance/${item.id}`}
                 key={item.id}
                 className="flex items-center justify-between p-2 mt-3 text-white bg-gray-700 rounded-sm"
               >
@@ -66,7 +68,7 @@ const Attendance = ({ attendance, classId }: any) => {
                 >
                   Copy Link
                 </button>
-              </div>
+              </Link>
             );
           })}
         </div>
