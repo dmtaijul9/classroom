@@ -1,17 +1,42 @@
 import { useRouter } from "next/router";
 import React, { useRef } from "react";
-import Layout from "../../components/UI/Layout";
-import { useForm } from "../../lib/useForm";
+import Layout from "../../../../components/UI/Layout";
+import { useForm } from "../../../../lib/useForm";
 import { useSelector, useDispatch } from "react-redux";
-import { examNameAdded, quizAdded } from "../../redux/resolvers/quizeSlice";
+import {
+  examNameAdded,
+  quizAdded,
+} from "../../../../redux/resolvers/quizeSlice";
 import { toast } from "react-toastify";
+import axios from "axios";
+import { useMutation } from "react-query";
+
+const saveQuestionAxios = (exam: any) => {
+  return axios.post("/api/create-quiz", exam, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
 
 const CreateQuizPage = () => {
   const router = useRouter();
-  const quizName = useRef();
+  const { classId } = router.query;
+
+  const quizName = useRef<any>();
   const dispatch = useDispatch();
-  const quiz = useSelector((state) => state.quiz);
+  const quiz = useSelector((state: any) => state.quiz);
   console.log(quiz);
+
+  const saveQuestionAxios = (exam: any) => {
+    return axios.post(`/api/classroom/single/${classId}/create-quiz`, exam, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  };
+
+  const { mutate } = useMutation(saveQuestionAxios);
 
   const { handleChange, inputs, clearForm } = useForm({
     question: "",
@@ -21,6 +46,7 @@ const CreateQuizPage = () => {
     c: "",
     d: "",
   });
+
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
@@ -30,10 +56,12 @@ const CreateQuizPage = () => {
   const addQuestion = (e: any) => {
     e.preventDefault();
     const { question, answerType, a, b, c, d } = inputs;
-    if (!question || !answerType || !a || !b || !c || !d) {
+    if (!question || !answerType) {
       return toast.error("Input Type is incorrent!");
     }
+
     const variables: {
+      classId: string;
       question: string;
       answerType: string;
       a?: string;
@@ -41,9 +69,14 @@ const CreateQuizPage = () => {
       c?: string;
       d?: string;
     } = {};
+
     variables.question = question;
     variables.answerType = answerType;
+
     if (variables.answerType === "objective") {
+      if (!a || !b || !c || !d) {
+        return toast.error("Input Type is incorrent!");
+      }
       (variables.a = a),
         (variables.b = b),
         (variables.c = c),
@@ -54,7 +87,20 @@ const CreateQuizPage = () => {
     clearForm();
   };
 
-  if (quiz.examName) {
+  const saveQuestion = () => {
+    mutate(quiz, {
+      onSuccess: (value) => {
+        console.log(value);
+        clearForm();
+        router.push("/my-classes");
+      },
+      onError: (err) => {
+        console.log(err);
+      },
+    });
+  };
+
+  if (!quiz.examName) {
     return (
       <Layout>
         <div className="flex flex-col min-h-[80vh] bg-grey-lighter">
@@ -91,10 +137,39 @@ const CreateQuizPage = () => {
     <Layout>
       <div className="flex container m-auto my-5 flex-col justify-between items-center min-h-[80vh] bg-grey-lighter border">
         <div className="w-full p-10">
-          <div className="w-full py-5 text-center text-white bg-gray-900 rounded-sm">
+          <div className="flex justify-between w-full px-4 py-5 text-center text-white bg-gray-900 rounded-sm">
             <h1>
-              <span className="font-bold">Exam Name:</span> Something
+              <span className="font-bold">Exam Name:</span> {quiz.examName}
             </h1>
+            <button className="px-4 py-1 bg-red-500" onClick={saveQuestion}>
+              Save
+            </button>
+          </div>
+          <div className="flex flex-col mt-5 space-y-7">
+            {quiz.questions.map((quiz: any) => {
+              return (
+                <div key={quiz.question}>
+                  <div>
+                    <h1>
+                      <span className="font-bold">Q: </span>
+                      {quiz.question}
+                    </h1>
+                  </div>
+                  {quiz.answerType === "textArea" ? (
+                    <div>
+                      <textarea className="w-full mt-5 border" rows={5} />
+                    </div>
+                  ) : (
+                    <div className="grid grid-cols-2 gap-3 mt-4">
+                      <div>a: {quiz.a}</div>
+                      <div>b: {quiz.b}</div>
+                      <div>c: {quiz.c}</div>
+                      <div>d: {quiz.d}</div>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
         <div className="w-full p-10">
@@ -118,7 +193,11 @@ const CreateQuizPage = () => {
                 className="flex items-center mt-3"
               >
                 Answer Type:{" "}
-                <select name="answerType" className="w-full px-2 py-1 border">
+                <select
+                  name="answerType"
+                  defaultValue="objective"
+                  className="w-full px-2 py-1 border"
+                >
                   <option value="objective">Multiple Choice Question.</option>
                   <option value="textArea">Text</option>
                 </select>

@@ -9,7 +9,6 @@ import { useForm } from "../../../lib/useForm";
 
 const index = ({ comments, refetch }: any) => {
   const { data: session, status } = useSession();
-  console.log(comments);
 
   const router = useRouter();
   const { classId } = router.query;
@@ -21,7 +20,6 @@ const index = ({ comments, refetch }: any) => {
 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
-    console.log(inputs);
     const { comment } = inputs;
     if (comment.trim() === "") {
       return toast.error("Comment should not be Empty.!");
@@ -40,8 +38,6 @@ const index = ({ comments, refetch }: any) => {
           "Content-Type": "application/json",
         },
       });
-      console.log(res);
-      toast.success("Message Successfull!");
       refetch();
       clearForm();
     } catch (error) {
@@ -56,8 +52,8 @@ const index = ({ comments, refetch }: any) => {
         <h1 className="font-semibold">Comments</h1>
       </div>
       {hasComments ? (
-        <div className=" p-4 min-h-[230px] max-h-[600px] flex-col space-y-2">
-          <div className="flex flex-col space-y-3 overflow-y-auto">
+        <div className=" p-4 min-h-[230px] max-h-[600px] flex-col space-y-2 overflow-y-auto">
+          <div className="flex flex-col space-y-3 ">
             {comments.map((comment: any) => {
               return (
                 <div key={comment?.id} className="pb-3 border-b">

@@ -1,13 +1,14 @@
 import { useSession } from "next-auth/react";
-import React from "react";
-import Layout from "../../components/UI/Layout";
-import Notification from "../../components/Class/Notification";
-import Comments from "../../components/Class/Comments";
-import Quiz from "../../components/Class/Quiz";
+import React, { useEffect } from "react";
+import Layout from "../../../components/UI/Layout";
+import Notification from "../../../components/Class/Notification";
+import Comments from "../../../components/Class/Comments";
+import Quiz from "../../../components/Class/Quiz";
 import { useRouter } from "next/router";
-import Meterials from "../../components/Class/Meterials";
+import Meterials from "../../../components/Class/Meterials";
 import axios from "axios";
 import { useQuery } from "react-query";
+import Attendance from "../../../components/attendance";
 
 const getClassroomData = (classId: any) => {
   return axios.get(`/api/classroom/single/${classId}`);
@@ -20,6 +21,12 @@ const SingleClassPage = () => {
 
   const { data: session, status }: any = useSession();
 
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/login");
+    }
+  });
+
   const { data, isLoading, isError, refetch } = useQuery(
     ["singleClass", classId],
     () => getClassroomData(classId),
@@ -30,7 +37,7 @@ const SingleClassPage = () => {
 
   const classroom = data?.data?.classroom;
 
-  const isOwnerClass = session?.user.id === classroom?.teacher.id;
+  const isOwnerClass = session?.user?.id === classroom?.teacher.id;
 
   const totalStudents = classroom?.students?.length;
 
@@ -95,8 +102,15 @@ const SingleClassPage = () => {
               <Meterials
                 classId={classroom?.id}
                 meterials={classroom?.meterials}
+                isOwnerClass={isOwnerClass}
               />
-              <Quiz />
+              <Quiz quizs={classroom?.Quizs} isOwnerClass={isOwnerClass} />
+              {isOwnerClass && (
+                <Attendance
+                  attendance={classroom?.attendance}
+                  classId={classroom?.id}
+                />
+              )}
             </div>
             <div className="w-full md:w-1/3">
               <Comments comments={classroom?.comments} refetch={refetch} />

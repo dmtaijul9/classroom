@@ -10,7 +10,11 @@ export default async function handler(
     console.log(req.body);
     const { subject, studentId, noteText } = req.body;
 
-    const variables = { subject, noteText, userId: studentId };
+    const variables = {
+      subject,
+      noteText: JSON.stringify(noteText),
+      userId: studentId,
+    };
 
     try {
       const newNote = await prisma.note.create({

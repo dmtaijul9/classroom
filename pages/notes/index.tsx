@@ -8,7 +8,7 @@ import { useQuery } from "react-query";
 import CreateNote from "../../components/Notes/CreateNote";
 import Layout from "../../components/UI/Layout";
 
-const fetchNotes = (pageAndId) => {
+const fetchNotes = (pageAndId: any) => {
   return axios.get("/api/notes", {
     params: pageAndId,
     headers: {
@@ -18,11 +18,18 @@ const fetchNotes = (pageAndId) => {
 };
 
 const index = () => {
-  const { data: session, status } = useSession();
   const router = useRouter();
   const [page, setPage] = useState(0);
+  const { data: session, status } = useSession();
 
   const studentId = session?.user?.id;
+  useEffect(() => {
+    console.log(status);
+    if (status === "unauthenticated") {
+      router.push("/login");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const { isLoading, isError, data, error, isFetching, refetch } = useQuery(
     ["notes", studentId],
@@ -35,7 +42,6 @@ const index = () => {
   );
 
   const notes = data?.data.notes;
-  console.log(notes?.length);
 
   return (
     <Layout>

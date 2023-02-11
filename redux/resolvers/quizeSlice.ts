@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   examName: "",
-  quiz: [],
+  questions: [],
 };
 
 const quizSlice = createSlice({
@@ -12,7 +12,7 @@ const quizSlice = createSlice({
     quizAdded: (state, action) => {
       console.log(action.payload);
 
-      state.quiz.push(action.payload);
+      state.questions.push(action.payload);
     },
     examNameAdded: (state, action) => {
       state.examName = action.payload;
@@ -20,7 +20,7 @@ const quizSlice = createSlice({
     resetQuiz: (state, action) => {
       state = {
         examName: "",
-        quize: [],
+        questions: [],
       };
     },
   },

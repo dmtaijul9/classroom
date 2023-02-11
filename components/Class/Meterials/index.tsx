@@ -18,15 +18,21 @@ const createMeterial = (formData: any) => {
   });
 };
 
-const index = ({ classId, meterials }: { classId: string; meterials: any }) => {
+const index = ({
+  classId,
+  meterials,
+  isOwnerClass,
+}: {
+  classId: string;
+  meterials: any;
+  isOwnerClass: boolean;
+}) => {
   const { data: session, status }: any = useSession();
-  const userType = session?.user?.role;
   const { inputs, handleChange, clearForm } = useForm({
     fileName: "",
   });
 
   const isEmptyField = isEmpty(meterials);
-  console.log(isEmptyField);
 
   const { mutate } = useMutation(createMeterial);
   const handleSubmit = (e: any) => {
@@ -37,11 +43,11 @@ const index = ({ classId, meterials }: { classId: string; meterials: any }) => {
     formData.append("fileName", inputs.fileName);
     formData.append("classId", classId);
     formData.append("meterial", inputs.meterial);
-    console.log(inputs);
+
     mutate(formData, {
       onSuccess: (data) => {
         toast.success("Successfully created meterials");
-        console.log(data);
+
         clearForm();
       },
       onError: (err) => {
@@ -50,15 +56,10 @@ const index = ({ classId, meterials }: { classId: string; meterials: any }) => {
     });
   };
 
-  console.log(meterials);
-
   return (
     <div className="mt-6 border rounded-b-sm shadow-sm">
       <div className="flex items-center justify-between px-3 py-3 text-white bg-gray-700">
         <h1 className="font-semibold">Meterials</h1>
-        <Link href="/" className="px-3 py-1 bg-red-600 rounded-md ">
-          See All Files
-        </Link>
       </div>
       {isEmptyField ? (
         <div className="flex items-center justify-center min-h-[230px] flex-col space-y-2">
@@ -66,10 +67,13 @@ const index = ({ classId, meterials }: { classId: string; meterials: any }) => {
           <p>Empty Meterials</p>
         </div>
       ) : (
-        <div className="grid gap-5 p-5 md:grid-cols-2">
+        <div className="grid gap-5 p-5 overflow-y-auto md:grid-cols-2">
           {meterials?.map((meterial: any) => {
             return (
-              <div className="px-5 py-2 text-white underline bg-gray-900 rounded-md">
+              <div
+                key={meterial.id}
+                className="px-5 py-2 text-white underline bg-gray-900 rounded-md"
+              >
                 <a href={`http://localhost:3000${meterial.filePath}`} download>
                   <h1>
                     {meterial.fileName} - {meterial.fileType}{" "}
@@ -80,7 +84,7 @@ const index = ({ classId, meterials }: { classId: string; meterials: any }) => {
           })}
         </div>
       )}
-      {userType && (
+      {isOwnerClass && (
         <form
           className="flex flex-col w-full p-4 space-y-4 border-t"
           onSubmit={handleSubmit}

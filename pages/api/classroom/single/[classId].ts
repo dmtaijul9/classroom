@@ -24,8 +24,18 @@ export default async function handler(
               role: true,
             },
           },
-          comments: true,
+          comments: {
+            orderBy: {
+              createdAt: "desc",
+            },
+          },
           meterials: true,
+          Quizs: true,
+          attendance: {
+            orderBy: {
+              createdAt: "desc",
+            },
+          },
         },
       });
 

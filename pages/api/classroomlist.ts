@@ -27,7 +27,8 @@ export default async function handler(
       if (user?.role === "TEACHER") {
         return res.status(201).json({
           message: "Success",
-          classroom: user?.ClassRoom,
+          classroom: user?.ClassJoins,
+          createdClass: user?.ClassRoom,
         });
       }
 
