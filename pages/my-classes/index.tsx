@@ -32,6 +32,9 @@ const MyClassListPage = ({ classroom }: any) => {
         router.push("/");
       }
     }
+    if (status === "unauthenticated") {
+      router.push("/");
+    }
   });
 
   const { data, isLoading, isError } = useQuery(
@@ -57,7 +60,12 @@ const MyClassListPage = ({ classroom }: any) => {
     <Layout>
       <section className="container mx-auto">
         {isTeacher ? (
-          <ClassListForTeacher classroom={data?.data?.classroom} />
+          <>
+            <ClassListForTeacher classroom={data?.data?.createdClass} />
+            <div className="mt-10">
+              <ClassListForStudent classroom={data?.data?.classroom} />
+            </div>
+          </>
         ) : (
           <ClassListForStudent classroom={data?.data?.classroom} />
         )}

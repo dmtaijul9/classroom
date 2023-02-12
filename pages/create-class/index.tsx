@@ -44,6 +44,7 @@ const index = () => {
       });
       console.log(res);
       toast.success("Classroom created!");
+      router.push("/my-classes/" + res?.data?.created?.id);
     } catch (error) {
       //@ts-ignore
       console.log(error);
@@ -85,7 +86,7 @@ const index = () => {
               type="submit"
               className="w-full py-3 my-1 text-center text-white bg-purple-600 rounded bg-green hover:bg-green-dark focus:outline-none"
             >
-              Create Account
+              Create Class
             </button>
           </form>
         </div>

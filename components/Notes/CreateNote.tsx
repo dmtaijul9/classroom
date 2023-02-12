@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { useForm } from "../../lib/useForm";
 import axios from "axios";
 import { useMutation } from "react-query";
 import { toast } from "react-toastify";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 const Editor = dynamic(() => import("../Editor/index"), { ssr: false });
 
-const newNoteCreator = (newNote) => {
+const newNoteCreator = (newNote: any) => {
   return axios.post("/api/notes", newNote, {
     headers: {
       ContentType: "application/json",
@@ -18,10 +19,17 @@ const newNoteCreator = (newNote) => {
 
 const CreateNote = ({ refetch }: any) => {
   const { data: session, status } = useSession();
+  const router = useRouter();
   const [editorValue, setEditorValue] = useState("");
   const { inputs, handleChange, clearForm } = useForm({
     subject: "",
   });
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/login");
+    }
+  }, []);
 
   const { mutate, isLoading, isSuccess, data, isError, error } =
     useMutation(newNoteCreator);

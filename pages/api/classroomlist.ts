@@ -27,7 +27,8 @@ export default async function handler(
       if (user?.role === "TEACHER") {
         return res.status(201).json({
           message: "Success",
-          classroom: user?.ClassRoom,
+          classroom: user?.ClassJoins,
+          createdClass: user?.ClassRoom,
         });
       }
 
@@ -36,6 +37,8 @@ export default async function handler(
         classroom: user?.ClassJoins,
       });
     } catch (error) {
+      console.log(error);
+
       res.status(500).json({ message: "Something went wrong" });
     }
   }

@@ -6,20 +6,23 @@ generator client {
 }
 
 datasource db {
-  provider          = "mysql"
-  url               = env("DATABASE_URL")
-  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+  provider = "mysql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
-  id         String               @id @default(cuid())
-  name       String
-  role       String
-  email      String               @unique
-  password   String
-  ClassRoom  ClassRoom[]
-  ClassJoins ClassroomWithUsers[]
-  notes      Note[]
+  id             String               @id @default(cuid())
+  name           String
+  role           String
+  email          String               @unique
+  password       String
+  ClassRoom      ClassRoom[]
+  ClassJoins     ClassroomWithUsers[]
+  notes          Note[]
+  answer         Answer[]
+  Attendance     Attendance?          @relation(fields: [attendanceId], references: [id])
+  attendanceId   String?
+  UserAttendance UserAttendance[]
 
   @@map(name: "users")
 }
@@ -36,18 +39,40 @@ model ClassRoom {
   id           String               @id @default(cuid())
   name         String
   subject      String
-  notification String?
+  notification Json?
   joinCode     String               @unique
   teacher      User?                @relation(fields: [userId], references: [id])
   userId       String?
   students     ClassroomWithUsers[]
   comments     Comment[]
+  meterials    Meterial[]
+  Quizs        Quiz[]
+  attendance   Attendance[]
+}
+
+model UserAttendance {
+  id           String      @id @default(uuid())
+  User         User?       @relation(fields: [userId], references: [id])
+  userId       String
+  Attendance   Attendance? @relation(fields: [attendanceId], references: [id])
+  attendanceId String?
+}
+
+model Attendance {
+  id          String           @id @default(uuid())
+  topicName   String
+  students    UserAttendance[]
+  createdAt   DateTime         @default(now())
+  isAllow     Boolean          @default(true)
+  ClassRoom   ClassRoom?       @relation(fields: [classRoomId], references: [id])
+  classRoomId String?
+  User        User[]
 }
 
 model Note {
   id       String  @id @default(uuid())
   subject  String
-  noteText String
+  noteText Json
   User     User?   @relation(fields: [userId], references: [id])
   userId   String?
 }
@@ -58,4 +83,53 @@ model Comment {
   message     String
   ClassRoom   ClassRoom? @relation(fields: [classRoomId], references: [id])
   classRoomId String?
+  createdAt   DateTime   @default(now())
+}
+
+model Meterial {
+  id          String     @id @default(uuid())
+  fileName    String
+  filePath    String
+  fileType    String
+  ClassRoom   ClassRoom? @relation(fields: [classRoomId], references: [id])
+  classRoomId String?
+}
+
+model Question {
+  id         String  @id @default(uuid())
+  question   String
+  answerType String
+  a          String?
+  b          String?
+  c          String?
+  d          String?
+  Quiz       Quiz?   @relation(fields: [quizId], references: [id])
+  quizId     String?
+}
+
+model Quiz {
+  id          String     @id @default(uuid())
+  examName    String
+  questions   Question[]
+  answer      Answer[]
+  ClassRoom   ClassRoom? @relation(fields: [classRoomId], references: [id])
+  classRoomId String?
+}
+
+model QuistionAnswer {
+  id       String  @id @default(uuid())
+  question String
+  answer   String
+  Answer   Answer? @relation(fields: [answerId], references: [id])
+  answerId String?
+}
+
+model Answer {
+  id              String           @id @default(uuid())
+  result          String?
+  quiestionAnswer QuistionAnswer[]
+  student         User?            @relation(fields: [userId], references: [id])
+  userId          String?
+  Quiz            Quiz?            @relation(fields: [quizId], references: [id])
+  quizId          String?
 }

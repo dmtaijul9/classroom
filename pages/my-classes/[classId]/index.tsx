@@ -1,16 +1,16 @@
 import { useSession } from "next-auth/react";
-import React from "react";
-import Layout from "../../components/UI/Layout";
-import prisma from "../../lib/prisma";
-import Notification from "../../components/Class/Notification";
-import Comments from "../../components/Class/Comments";
-import Quiz from "../../components/Class/Quiz";
+import React, { useEffect } from "react";
+import Layout from "../../../components/UI/Layout";
+import Notification from "../../../components/Class/Notification";
+import Comments from "../../../components/Class/Comments";
+import Quiz from "../../../components/Class/Quiz";
 import { useRouter } from "next/router";
-import Meterials from "../../components/Class/Meterials";
+import Meterials from "../../../components/Class/Meterials";
 import axios from "axios";
 import { useQuery } from "react-query";
+import Attendance from "../../../components/attendance";
 
-const getClassroomData = (classId) => {
+const getClassroomData = (classId: any) => {
   return axios.get(`/api/classroom/single/${classId}`);
 };
 //@ts-ignore
@@ -19,7 +19,13 @@ const SingleClassPage = () => {
 
   const { classId } = router.query;
 
-  const { data: session, status } = useSession();
+  const { data: session, status }: any = useSession();
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/login");
+    }
+  });
 
   const { data, isLoading, isError, refetch } = useQuery(
     ["singleClass", classId],
@@ -31,7 +37,7 @@ const SingleClassPage = () => {
 
   const classroom = data?.data?.classroom;
 
-  const isOwnerClass = session?.user.id === classroom?.teacher.id;
+  const isOwnerClass = session?.user?.id === classroom?.teacher.id;
 
   const totalStudents = classroom?.students?.length;
 
@@ -52,8 +58,6 @@ const SingleClassPage = () => {
       },
     });
   };
-
-  console.log(classroom);
 
   return (
     <Layout>
@@ -89,16 +93,26 @@ const SingleClassPage = () => {
           <div className="py-3 border-b">
             <h1 className="font-medium uppercase">All Classwork</h1>
           </div>
-          <div className="flex mt-10 space-x-5">
-            <div className="w-2/3">
+          <div className="flex flex-col mt-10 space-y-5 md:space-x-5 md:space-y-0 md:flex-row">
+            <div className="w-full md:w-2/3">
               <Notification
                 notification={classroom?.notification}
                 isOwnerClass={isOwnerClass}
               />
-              <Meterials />
-              <Quiz />
+              <Meterials
+                classId={classroom?.id}
+                meterials={classroom?.meterials}
+                isOwnerClass={isOwnerClass}
+              />
+              <Quiz quizs={classroom?.Quizs} isOwnerClass={isOwnerClass} />
+              {isOwnerClass && (
+                <Attendance
+                  attendance={classroom?.attendance}
+                  classId={classroom?.id}
+                />
+              )}
             </div>
-            <div className="w-1/3">
+            <div className="w-full md:w-1/3">
               <Comments comments={classroom?.comments} refetch={refetch} />
             </div>
           </div>

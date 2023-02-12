@@ -5,6 +5,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import { Provider } from "react-redux";
+import store from "../redux/store";
 
 const queryClient = new QueryClient();
 
@@ -13,12 +15,14 @@ export default function App({
   pageProps: { session, ...pageProps },
 }: AppProps) {
   return (
-    <SessionProvider session={session}>
-      <QueryClientProvider client={queryClient}>
-        <Component {...pageProps} />
-        <ToastContainer />
-        <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
-      </QueryClientProvider>
-    </SessionProvider>
+    <Provider store={store}>
+      <SessionProvider session={session}>
+        <QueryClientProvider client={queryClient}>
+          <Component {...pageProps} />
+          <ToastContainer />
+          <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
+        </QueryClientProvider>
+      </SessionProvider>
+    </Provider>
   );
 }

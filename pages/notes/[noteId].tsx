@@ -1,6 +1,7 @@
 import axios from "axios";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect } from "react";
 import { useMutation, useQuery } from "react-query";
 import { toast } from "react-toastify";
 import Layout from "../../components/UI/Layout";
@@ -16,7 +17,13 @@ const deleteNote = (noteId) => {
 const SingleNotePage = () => {
   const router = useRouter();
   const { noteId } = router.query;
-  console.log(noteId);
+  const { data: session, status } = useSession();
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/login");
+    }
+  }, []);
 
   const { data, isLoading, isError, error } = useQuery(
     ["Note", noteId],
@@ -43,6 +50,7 @@ const SingleNotePage = () => {
   };
 
   const note = data?.data?.note;
+  console.log(note);
 
   if (isLoading) {
     return (
@@ -56,6 +64,10 @@ const SingleNotePage = () => {
     );
   }
 
+  const jsonToString = (json) => {
+    return JSON.parse(json);
+  };
+
   return (
     <Layout>
       <section className="max-w-5xl mx-auto">
@@ -65,7 +77,10 @@ const SingleNotePage = () => {
           </h1>
         </div>
         <div className="mt-5 border min-h-[500px] p-5 rounded-md shadow-md">
-          <div dangerouslySetInnerHTML={{ __html: note?.noteText }}></div>
+          <div
+            dangerouslySetInnerHTML={{ __html: jsonToString(note?.noteText) }}
+            className="w-full overflow-x-auto"
+          ></div>
         </div>
         <div className="mt-5 text-right">
           <button
