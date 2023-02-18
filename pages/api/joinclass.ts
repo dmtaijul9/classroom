@@ -58,8 +58,9 @@ export default async function handler(
         },
       });
 
-      console.log(joinedClass);
-      res.status(201).json({ message: "You are Joined!" });
+      res
+        .status(201)
+        .json({ message: "You are Joined!", classroom: joinedClass });
     }
   } catch (error: any) {
     res.status(404).json({ message: error.message });

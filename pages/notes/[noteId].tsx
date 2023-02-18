@@ -1,16 +1,17 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useMutation, useQuery } from "react-query";
 import { toast } from "react-toastify";
 import Layout from "../../components/UI/Layout";
 
-const fetchNote = (noteId) => {
+const fetchNote = (noteId: any) => {
   return axios.get(`/api/notes/${noteId}`);
 };
 
-const deleteNote = (noteId) => {
+const deleteNote = (noteId: any) => {
   return axios.delete(`/api/notes/${noteId}`);
 };
 
@@ -18,6 +19,7 @@ const SingleNotePage = () => {
   const router = useRouter();
   const { noteId } = router.query;
   const { data: session, status } = useSession();
+  const [noteText, setNoteText] = useState("");
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -37,20 +39,22 @@ const SingleNotePage = () => {
 
   const deleteHandler = () => {
     deletNoteMutation.mutate(noteId, {
-      onSuccess() {
+      onSuccess: async () => {
         toast.success("Deleted Succuessfully");
         router.push("/notes");
       },
       onError(error, variables, context) {
-        console.log(error);
-
         toast.error("Something Went wring");
       },
     });
   };
 
   const note = data?.data?.note;
-  console.log(note);
+  useEffect(() => {
+    if (note) {
+      setNoteText(JSON.parse(note.noteText));
+    }
+  }, [note]);
 
   if (isLoading) {
     return (
@@ -64,10 +68,6 @@ const SingleNotePage = () => {
     );
   }
 
-  const jsonToString = (json) => {
-    return JSON.parse(json);
-  };
-
   return (
     <Layout>
       <section className="max-w-5xl mx-auto">
@@ -77,10 +77,12 @@ const SingleNotePage = () => {
           </h1>
         </div>
         <div className="mt-5 border min-h-[500px] p-5 rounded-md shadow-md">
-          <div
-            dangerouslySetInnerHTML={{ __html: jsonToString(note?.noteText) }}
-            className="w-full overflow-x-auto"
-          ></div>
+          {!isLoading && (
+            <div
+              dangerouslySetInnerHTML={{ __html: noteText }}
+              className="w-full overflow-x-auto"
+            ></div>
+          )}
         </div>
         <div className="mt-5 text-right">
           <button

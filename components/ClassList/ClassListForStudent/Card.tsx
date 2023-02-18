@@ -1,15 +1,8 @@
 import Link from "next/link";
 import React from "react";
-import { FaCopy } from "react-icons/fa";
-import { toast } from "react-toastify";
 
 const Card = ({ item }: any) => {
   const classroom = item.ClassRoom;
-
-  const copyJoinCode = () => {
-    navigator.clipboard.writeText(classroom.joinCode);
-    toast.success("Class Join Code Copied!");
-  };
 
   return (
     <div className="p-5 border rounded-md shadow-sm">

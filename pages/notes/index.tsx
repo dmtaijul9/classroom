@@ -24,7 +24,6 @@ const index = () => {
 
   const studentId = session?.user?.id;
   useEffect(() => {
-    console.log(status);
     if (status === "unauthenticated") {
       router.push("/login");
     }

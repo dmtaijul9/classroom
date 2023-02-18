@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { FC } from "react";
 import dynamic from "next/dynamic";
 
@@ -15,7 +16,6 @@ const JitsiMeeting = dynamic(
 const index = () => {
   const router = useRouter();
   const { meet_name, name, email } = router.query;
-  console.log(router.query);
 
   return (
     <div>

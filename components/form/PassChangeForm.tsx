@@ -6,8 +6,6 @@ import { useForm } from "../../lib/useForm";
 import { resetPassword } from "../../pages/reset/[resetToken]";
 
 const PassChangeForm = ({ selectedRowData, isProfile }: any) => {
-  console.log(selectedRowData);
-
   const { inputs, handleChange } = useForm({
     password: "",
     confirmPassword: "",
@@ -15,7 +13,7 @@ const PassChangeForm = ({ selectedRowData, isProfile }: any) => {
   const { mutate, isLoading } = useMutation(resetPassword);
   const changePassword = (e) => {
     e.preventDefault();
-    console.log(inputs);
+
     const { password, confirmPassword } = inputs;
     if (!password.trim() || !confirmPassword.trim()) {
       return toast.error("Empty Field!");
@@ -29,7 +27,6 @@ const PassChangeForm = ({ selectedRowData, isProfile }: any) => {
     };
     mutate(variables, {
       onSuccess(data, variables, context) {
-        console.log(data);
         toast.success("Changed Successfully");
       },
       onError: () => {
