@@ -16,7 +16,7 @@ export default async function handler(
           id: classroomId,
         },
         data: {
-          notification,
+          notification: JSON.stringify(notification),
         },
       });
 

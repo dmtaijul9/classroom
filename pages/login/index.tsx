@@ -50,7 +50,7 @@ const index = () => {
   };
   return (
     <Layout>
-      <section className="container m-auto">
+      <section className="container py-10 m-auto">
         <div className="lg:flex lg:items-center">
           <div className="lg:w-1/2 xl:max-w-screen-sm">
             <div className="px-12 mt-10 sm:px-24 md:px-48 lg:px-12 lg:mt-16 xl:px-24 xl:max-w-2xl">
@@ -60,7 +60,7 @@ const index = () => {
                 </div>
               </div>
               <div className="mt-12">
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} autoComplete="off">
                   <div>
                     <div className="text-sm font-bold tracking-wide text-gray-700">
                       Email Address

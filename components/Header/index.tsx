@@ -120,13 +120,13 @@ const HeaderNav = () => {
                           User Management
                         </Link>
                         <Link
-                          href="/signup"
+                          href="/dashboard/classes"
                           className={classNames(
                             " hover:text-gray-500",
                             "px-3 py-2 rounded-md text-sm font-bold"
                           )}
                         >
-                          Create User
+                          Classes
                         </Link>
                       </>
                     )}

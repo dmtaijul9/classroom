@@ -46,10 +46,9 @@ const SignUpPage = () => {
       //@ts-ignore
       const res = await signupMutation.mutateAsync(variables);
       toast.success(res.data.message);
-      console.log(res);
+
       clearForm();
     } catch (error) {
-      console.log(error);
       toast.error("Server Error!");
     }
   };

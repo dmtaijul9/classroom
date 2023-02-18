@@ -9,15 +9,16 @@ import { useRouter } from "next/router";
 
 const JoinClassPage = () => {
   const { data: session, status } = useSession();
+
   const router = useRouter();
-  const { inputs, handleChange } = useForm({
+  const { inputs, handleChange, resetForm } = useForm({
     joinCode: "",
   });
   useEffect(() => {
-    if (!session) {
+    if (status === "unauthenticated") {
       router.push("/login");
     }
-  }, []);
+  }, [status]);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -26,16 +27,15 @@ const JoinClassPage = () => {
     if (joinCode.trim() === "") {
       toast.error("Field cannot be empty!");
     }
-    /*  if (session?.user.role !== "STUDENT") {
+    if (session?.user?.role === "ADMIN") {
       return toast.error("You can not join Any classes!");
-    } */
+    }
     try {
       const variables = {
         joinCode,
         //@ts-ignore
         userId: session?.user.id,
       };
-      console.log(variables);
 
       const res = await axios({
         method: "POST",
@@ -45,11 +45,14 @@ const JoinClassPage = () => {
           "Content-Type": "application/json",
         },
       });
-      console.log(res);
+
       toast.success(res.data.message);
+      router.push(`/my-classes/${res.data.classroom.id}`);
+      resetForm();
     } catch (error) {
       //@ts-ignore
       toast.error(error?.response.data.message);
+      resetForm();
     }
   };
   return (

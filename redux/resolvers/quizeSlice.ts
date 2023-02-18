@@ -10,8 +10,6 @@ const quizSlice = createSlice({
   initialState,
   reducers: {
     quizAdded: (state, action) => {
-      console.log(action.payload);
-
       state.questions.push(action.payload);
     },
     examNameAdded: (state, action) => {

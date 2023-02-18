@@ -25,7 +25,7 @@ const Reset = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const { password, confirmPassword } = inputs;
-    console.log(inputs);
+
     if (!password.trim() || !confirmPassword.trim()) {
       return toast.error("Empty Field!");
     }
@@ -38,13 +38,9 @@ const Reset = () => {
     };
     mutate(variables, {
       onSuccess(data, variables, context) {
-        console.log(data.data);
-
         toast.success("Successfully You updated!");
       },
       onError: (error) => {
-        console.log(error);
-
         toast.error("Something is wrong!");
       },
     });
@@ -82,7 +78,7 @@ const Reset = () => {
               type="submit"
               className="w-full py-3 my-1 text-center text-white bg-purple-600 rounded bg-green hover:bg-green-dark focus:outline-none"
             >
-              {isLoading ? "Sending" : "Send Email"}
+              {isLoading ? "Reseting" : "Reset"}
             </button>
           </form>
         </div>

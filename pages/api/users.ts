@@ -24,10 +24,18 @@ export default async function handler(
     try {
       console.log("I am dong");
 
+      const deletedClasses = await prisma.classRoom.deleteMany({
+        where: {
+          teacher: {
+            id: userId,
+          },
+        },
+      });
+      console.log(deletedClasses);
       const deletedUser = await prisma.user.delete({ where: { id: userId } });
       console.log(deletedUser);
 
-      if (!deletedUser) {
+      if (!deletedUser || !deletedClasses) {
         throw new Error("Something went wrong");
       }
       res.status(200).json({

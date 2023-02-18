@@ -26,7 +26,6 @@ const CreateQuizPage = () => {
   const quizName = useRef<any>();
   const dispatch = useDispatch();
   const quiz = useSelector((state: any) => state.quiz);
-  console.log(quiz);
 
   const saveQuestionAxios = (exam: any) => {
     return axios.post(`/api/classroom/single/${classId}/create-quiz`, exam, {
@@ -38,7 +37,7 @@ const CreateQuizPage = () => {
 
   const { mutate } = useMutation(saveQuestionAxios);
 
-  const { handleChange, inputs, clearForm } = useForm({
+  const { handleChange, inputs, resetForm } = useForm({
     question: "",
     a: "",
     answerType: "objective",
@@ -84,13 +83,12 @@ const CreateQuizPage = () => {
     }
 
     dispatch(quizAdded(variables));
-    clearForm();
+    resetForm();
   };
 
   const saveQuestion = () => {
     mutate(quiz, {
       onSuccess: (value) => {
-        console.log(value);
         clearForm();
         router.push("/my-classes");
       },
@@ -266,3 +264,6 @@ const CreateQuizPage = () => {
 };
 
 export default CreateQuizPage;
+function clearForm() {
+  throw new Error("Function not implemented.");
+}

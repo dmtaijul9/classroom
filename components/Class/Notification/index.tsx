@@ -9,17 +9,17 @@ import { useRouter } from "next/router";
 
 const Editor = dynamic(() => import("../../Editor"), { ssr: false });
 
-const index = ({ notification, isOwnerClass }) => {
+const index = ({ notification, isOwnerClass }: any) => {
   const router = useRouter();
   const { classId } = router.query;
   const [newNotification, setNewNotification] = useState("");
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState(notification);
 
   useEffect(() => {
     if (notification) {
-      setMessage(notification);
+      setMessage(JSON.parse(notification));
     }
-  }, []);
+  }, [notification]);
 
   const notificationUpdateHandler = async () => {
     if (
@@ -34,7 +34,7 @@ const index = ({ notification, isOwnerClass }) => {
     };
 
     try {
-      const res = await axios({
+      await axios({
         method: "POST",
         url: `/api/classroom/notification/${classId}`,
         data: variables,
@@ -54,7 +54,7 @@ const index = ({ notification, isOwnerClass }) => {
       <div className="px-3 py-3 text-white bg-gray-700">
         <h1 className="font-semibold">Notification</h1>
       </div>
-      {notification ? (
+      {message ? (
         <div
           className="p-5 min-h-[230px] notification"
           dangerouslySetInnerHTML={{ __html: message }}
