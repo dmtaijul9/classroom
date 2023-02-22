@@ -59,7 +59,7 @@ const index = ({
   return (
     <div className="mt-6 border rounded-b-sm shadow-sm">
       <div className="flex items-center justify-between px-3 py-3 text-white bg-gray-700">
-        <h1 className="font-semibold">Meterials</h1>
+        <h1 className="text-xl font-semibold">Meterials</h1>
       </div>
       {isEmptyField ? (
         <div className="flex items-center justify-center min-h-[230px] flex-col space-y-2">

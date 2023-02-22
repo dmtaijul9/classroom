@@ -16,10 +16,7 @@ const quizSlice = createSlice({
       state.examName = action.payload;
     },
     resetQuiz: (state, action) => {
-      state = {
-        examName: "",
-        questions: [],
-      };
+      (state.examName = ""), (state.questions = []);
     },
   },
 });

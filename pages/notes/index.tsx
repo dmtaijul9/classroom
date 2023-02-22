@@ -46,7 +46,7 @@ const index = () => {
     <Layout>
       <section className="flex mx-auto space-x-5 max-w-7xl">
         <div className="w-3/5">
-          <div className="py-3 font-semibold tracking-wide uppercase border-b">
+          <div className="py-3 text-xl font-semibold tracking-wide uppercase border-b">
             <h1>All Notes</h1>
           </div>
           <div className="flex flex-col mt-5 space-y-3">

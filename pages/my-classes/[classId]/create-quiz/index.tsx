@@ -6,21 +6,23 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   examNameAdded,
   quizAdded,
+  resetQuiz,
 } from "../../../../redux/resolvers/quizeSlice";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useMutation } from "react-query";
 
-const saveQuestionAxios = (exam: any) => {
+/* const saveQuestionAxios = (exam: any) => {
   return axios.post("/api/create-quiz", exam, {
     headers: {
       "Content-Type": "application/json",
     },
   });
-};
+}; */
 
 const CreateQuizPage = () => {
   const router = useRouter();
+
   const { classId } = router.query;
 
   const quizName = useRef<any>();
@@ -37,7 +39,7 @@ const CreateQuizPage = () => {
 
   const { mutate } = useMutation(saveQuestionAxios);
 
-  const { handleChange, inputs, resetForm } = useForm({
+  const { handleChange, inputs, resetForm, clearForm } = useForm({
     question: "",
     a: "",
     answerType: "objective",
@@ -88,11 +90,13 @@ const CreateQuizPage = () => {
 
   const saveQuestion = () => {
     mutate(quiz, {
-      onSuccess: (value) => {
+      onSuccess: async (value) => {
         clearForm();
+        console.log(quizName);
+        dispatch(resetQuiz());
         router.push("/my-classes");
       },
-      onError: (err) => {
+      onError: async (err) => {
         console.log(err);
       },
     });

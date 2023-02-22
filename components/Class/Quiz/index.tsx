@@ -1,21 +1,55 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+import axios from "axios";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import { MdQuiz } from "react-icons/md";
+import { useMutation } from "react-query";
+import { toast } from "react-toastify";
 import isEmpty from "../../../utils/is-empty";
+
+const deleteQuizRequiest = ({ id }) => {
+  return axios.patch(
+    "/api/quiz",
+    { id },
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+};
 
 const index = ({ quizs, isOwnerClass }: any) => {
   const { data: session, status }: any = useSession();
   const router = useRouter();
 
   const isQuizEmpty = isEmpty(quizs);
+  const { mutate } = useMutation(deleteQuizRequiest);
+
+  const deleteQuizHandler = (id: any) => {
+    console.log(id);
+    mutate(
+      { id },
+      {
+        onSuccess: async (data) => {
+          console.log(data);
+          toast.success("Successfully deleted!");
+          window.location.reload();
+        },
+        onError: async (err) => {
+          console.log(err);
+          toast.error("Sorry! not deleted");
+        },
+      }
+    );
+  };
 
   return (
     <div className="mt-6 border rounded-b-sm shadow-sm">
       <div className="flex items-center justify-between px-3 py-3 text-white bg-gray-700">
-        <h1 className="font-semibold">Quiz</h1>
+        <h1 className="text-xl font-semibold">Quiz</h1>
       </div>
 
       {isQuizEmpty ? (
@@ -34,7 +68,7 @@ const index = ({ quizs, isOwnerClass }: any) => {
                 <div>
                   <h1>Exam name:- {quiz.examName}</h1>
                 </div>
-                <div>
+                <div className="flex space-x-2">
                   {" "}
                   <Link
                     href={`/exam/${quiz.id}`}
@@ -43,6 +77,14 @@ const index = ({ quizs, isOwnerClass }: any) => {
                     {" "}
                     Appair Exam{" "}
                   </Link>
+                  <button
+                    className="px-3 py-1 text-white bg-red-600 rounded-md"
+                    onClick={() => {
+                      deleteQuizHandler(quiz.id);
+                    }}
+                  >
+                    Delete
+                  </button>
                 </div>
               </div>
             );

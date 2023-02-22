@@ -78,23 +78,23 @@ const UserManagementPage = () => {
         <div className="order-2 w-full py-10 lg:w-2/3 lg:order-1">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <p className="uppercase">Users List</p>
+              <p className="text-xl uppercase">Users List</p>
             </div>
           </div>
           <div className="flex flex-col mt-5 ">
             <table className="w-full overflow-auto border-collapse ">
               <thead>
                 <tr>
-                  <th className="p-3 font-bold text-white uppercase bg-blue-600 border border-gray-300 lg:table-cell">
+                  <th className="p-3 text-xl font-bold text-white uppercase bg-green-600 border border-gray-300 lg:table-cell">
                     Name
                   </th>
-                  <th className="p-3 font-bold text-white uppercase bg-blue-600 border border-gray-300 lg:table-cell">
+                  <th className="p-3 text-xl font-bold text-white uppercase bg-green-600 border border-gray-300 lg:table-cell">
                     Email
                   </th>
-                  <th className="p-3 font-bold text-white uppercase bg-blue-600 border border-gray-300 lg:table-cell">
+                  <th className="p-3 text-xl font-bold text-white uppercase bg-green-600 border border-gray-300 lg:table-cell">
                     Role
                   </th>
-                  <th className="p-3 font-bold text-white uppercase bg-blue-600 border border-gray-300 lg:table-cell">
+                  <th className="p-3 text-xl font-bold text-white uppercase bg-green-600 border border-gray-300 lg:table-cell">
                     Action
                   </th>
                 </tr>

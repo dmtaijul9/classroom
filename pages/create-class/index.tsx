@@ -44,7 +44,7 @@ const index = () => {
       });
       console.log(res);
       toast.success("Classroom created!");
-      router.push("/my-classes/" + res?.data?.created?.id);
+      router.push("/my-classes");
     } catch (error) {
       //@ts-ignore
       console.log(error);
@@ -60,9 +60,7 @@ const index = () => {
             className="w-full px-6 py-8 text-black bg-gray-200 rounded shadow-md"
             onSubmit={handleSubmit}
           >
-            <h1 className="mb-8 text-3xl text-center">
-              Create a new classroom
-            </h1>
+            <h1 className="mb-8 text-3xl text-center">Create a new class</h1>
             <input
               type="text"
               className="block w-full p-3 mb-4 border rounded border-grey-light"
@@ -84,7 +82,7 @@ const index = () => {
 
             <button
               type="submit"
-              className="w-full py-3 my-1 text-center text-white bg-purple-600 rounded bg-green hover:bg-green-dark focus:outline-none"
+              className="w-full py-3 my-1 text-xl text-center text-white bg-green-600 rounded bg-green hover:bg-green-dark focus:outline-none"
             >
               Create Class
             </button>

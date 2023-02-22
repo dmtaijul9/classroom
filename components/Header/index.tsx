@@ -27,11 +27,10 @@ const HeaderNav = () => {
 
   const { data: session, status } = useSession();
 
-  const [role, setRole] = useState("");
-
   const logoutHandler = async () => {
     try {
       await signOut();
+      router.push("/");
     } catch (error) {
       console.log(error);
     }
@@ -44,11 +43,14 @@ const HeaderNav = () => {
   const isStudent = session?.user.role === "STUDENT";
 
   return (
-    <Disclosure as="nav" className="text-gray-900 bg-gray-200 shadow-md">
+    <Disclosure
+      as="nav"
+      className="text-white shadow-md bg-gradient-to-tr from-purple-900 to-black"
+    >
       {({ open }) => (
         <>
           <div className="container px-2 mx-auto ">
-            <div className="relative flex items-center justify-between h-16">
+            <div className="relative flex items-center justify-between h-24">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
                 <Disclosure.Button className="inline-flex items-center justify-center p-2 text-gray-400 rounded-md hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
@@ -60,39 +62,37 @@ const HeaderNav = () => {
                   )}
                 </Disclosure.Button>
               </div>
-              <div className="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start ">
-                <div className="flex items-center flex-shrink-0">
-                  <Link href="/" className="font-bold text-blue-700 uppercase">
-                    ELMA
-                  </Link>
-                </div>
+              <div className="flex items-center justify-center flex-1 sm:justify-start ">
+                <Link
+                  href="/"
+                  className="flex items-center flex-shrink-0 bg-white rounded-full "
+                >
+                  <Image
+                    src="/img/elma.png"
+                    alt="elma logo"
+                    width={90}
+                    className="rounded-full "
+                    height={90}
+                  />
+                </Link>
                 <div className="hidden font-semibold sm:ml-6 sm:block">
-                  <div className="flex space-x-4">
+                  <div className="flex items-center space-x-4">
                     <Link
-                      href="/"
-                      className={classNames(
-                        "    hover:text-gray-500",
-                        "px-3 py-2 rounded-md text-sm font-bold"
-                      )}
+                      href="/about-us"
+                      className="px-3 py-2 text-2xl font-bold rounded-md"
                     >
                       About Us
                     </Link>
                     <Link
-                      href="/"
-                      className={classNames(
-                        "    hover:text-gray-500",
-                        "px-3 py-2 rounded-md text-sm font-bold"
-                      )}
+                      href="/contact-us"
+                      className="px-3 py-2 text-2xl font-bold rounded-md"
                     >
                       Contact Us
                     </Link>
                     {isTeacher || isStudent ? (
                       <Link
                         href="/my-classes"
-                        className={classNames(
-                          "    hover:text-gray-500",
-                          "px-3 py-2 rounded-md text-sm font-bold"
-                        )}
+                        className="px-3 py-2 text-2xl font-bold rounded-md"
                       >
                         My Classes
                       </Link>
@@ -100,10 +100,7 @@ const HeaderNav = () => {
                     {isStudent && (
                       <Link
                         href="/notes"
-                        className={classNames(
-                          " hover:text-gray-500",
-                          "px-3 py-2 rounded-md text-sm font-bold"
-                        )}
+                        className="px-3 py-2 text-2xl font-bold rounded-md"
                       >
                         My Notes
                       </Link>
@@ -112,19 +109,13 @@ const HeaderNav = () => {
                       <>
                         <Link
                           href="/dashboard/user-management"
-                          className={classNames(
-                            " hover:text-gray-500",
-                            "px-3 py-2 rounded-md text-sm font-bold"
-                          )}
+                          className="px-3 py-2 text-2xl font-bold rounded-md"
                         >
                           User Management
                         </Link>
                         <Link
                           href="/dashboard/classes"
-                          className={classNames(
-                            " hover:text-gray-500",
-                            "px-3 py-2 rounded-md text-sm font-bold"
-                          )}
+                          className="px-3 py-2 text-2xl font-bold rounded-md"
                         >
                           Classes
                         </Link>
@@ -287,7 +278,7 @@ const HeaderNav = () => {
                 ) : (
                   <Link
                     href="/login"
-                    className="p-1 font-semibold uppercase rounded-full focus:outline-none "
+                    className="p-1 text-xl font-semibold uppercase rounded-full focus:outline-none "
                   >
                     <span className="sr-only">Create Or Join Class</span>
                     Login

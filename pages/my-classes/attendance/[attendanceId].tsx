@@ -82,7 +82,7 @@ const attendanceId = () => {
           )}
         </div>
         <div className="p-5">
-          {data?.data.sheet.students?.map((student) => {
+          {data?.data.sheet.students?.map((student: any) => {
             return (
               <div key={student.id}>
                 <h1>
