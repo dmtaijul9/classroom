@@ -69,7 +69,7 @@ const PassChangeForm = ({ selectedRowData, isProfile }: any) => {
           />
         </label>
         <button
-          className="w-full py-1 mt-3 text-white bg-blue-600 rounded-md"
+          className="w-full py-2 mt-3 text-xl text-white bg-green-600 rounded-md"
           type="submit"
         >
           {isLoading ? "Changing" : "Change Password"}

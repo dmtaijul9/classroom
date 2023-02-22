@@ -24,7 +24,7 @@ const index = () => {
     <Layout>
       <section className="container mx-auto">
         <div className="py-3 border-b">
-          <h1 className="font-semibold ">My Class</h1>
+          <h1 className="text-xl font-semibold">My Class</h1>
         </div>
         <div className="grid grid-cols-1 gap-4 px-2 mt-10 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2">
           {data?.data.classroom?.map((item: any) => (
@@ -39,9 +39,9 @@ const index = () => {
                   <div>
                     <Link
                       href={`/my-classes/${item?.id}`}
-                      className="px-3 py-1 text-white bg-red-600 rounded-sm "
+                      className="px-3 py-1 text-xl text-white bg-red-600 rounded-sm "
                     >
-                      Go to classroom
+                      Go to Class
                     </Link>
                   </div>
                 </div>

@@ -18,16 +18,16 @@ const Card = ({ item }: any) => {
 
       <div className="flex items-center justify-end mt-5 space-x-4">
         <div>
-          <button onClick={copyJoinCode}>
+          <button onClick={copyJoinCode} className="text-lg">
             <FaCopy />
           </button>
         </div>
         <div>
           <Link
             href={`/my-classes/${item.id}`}
-            className="px-3 py-1 text-white bg-red-600 rounded-sm "
+            className="px-3 py-1 text-xl text-white bg-red-600 rounded-sm "
           >
-            Go to classroom
+            Go to class
           </Link>
         </div>
       </div>

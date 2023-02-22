@@ -52,7 +52,7 @@ const index = ({ notification, isOwnerClass }: any) => {
   return (
     <div className="border rounded-b-sm shadow-sm">
       <div className="px-3 py-3 text-white bg-gray-700">
-        <h1 className="font-semibold">Notification</h1>
+        <h1 className="text-xl font-semibold">Notification</h1>
       </div>
       {message ? (
         <div

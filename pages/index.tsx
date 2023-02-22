@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Inter } from "@next/font/google";
 import Layout from "../components/UI/Layout";
 import Link from "next/link";
+import ContactForm from "../components/ContactForm";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,25 +20,18 @@ export default function Home() {
         <section className="py-20">
           <div className="z-20 px-6 py-12 text-center text-gray-800 lg:my-12 md:px-12 lg:text-left">
             <div className="container mx-auto xl:px-32">
-              <div className="flex grid items-center gap-12 lg:grid-cols-2">
+              <div className="flex items-center justify-between gap-12 lg:grid-cols-2">
                 <div className="mt-12 lg:mt-0">
-                  <h1 className="mb-12 text-5xl font-bold tracking-tight md:text-6xl xl:text-7xl">
-                    Online Classroom <br />
-                    <span className="text-blue-600">Service</span>
+                  <h1 className="mb-12 text-2xl font-bold tracking-wide md:text-3xl xl:text-5xl">
+                    E-Learning <br />
+                    Management <br /> Approach (
+                    <span className="text-blue-600">ELMA</span>)
                   </h1>
                   <Link
-                    className="inline-block py-3 mr-2 text-sm font-medium leading-snug text-white uppercase transition duration-150 ease-in-out bg-blue-600 rounded shadow-md px-7 hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg"
+                    className="inline-block py-3 mr-2 text-lg font-bold leading-snug text-white uppercase transition duration-150 ease-in-out bg-green-600 rounded shadow-md px-7 hover:bg-green-700 hover:shadow-lg focus:bg-green-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-800 active:shadow-lg"
                     href="/login"
                   >
                     Get started
-                  </Link>
-                  <Link
-                    className="inline-block py-3 text-sm font-medium leading-snug text-blue-600 uppercase transition duration-150 ease-in-out bg-transparent rounded px-7 hover:text-blue-700 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none focus:ring-0 active:bg-gray-200"
-                    data-mdb-ripple="true"
-                    data-mdb-ripple-color="light"
-                    href="#!"
-                  >
-                    Learn more
                   </Link>
                 </div>
                 <div className="mb-12 lg:mb-0">
@@ -77,19 +71,19 @@ export default function Home() {
               </p>
               <ul className="p-0 m-0 leading-6 border-0 border-gray-300">
                 <li className="box-border relative py-1 pl-0 text-left text-gray-500 border-solid">
-                  <span className="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-yellow-300 rounded-full">
+                  <span className="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-green-600 rounded-full">
                     <span className="text-sm font-bold">✓</span>
                   </span>{" "}
                   Maximize productivity and growth
                 </li>
                 <li className="box-border relative py-1 pl-0 text-left text-gray-500 border-solid">
-                  <span className="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-yellow-300 rounded-full">
+                  <span className="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-green-600 rounded-full">
                     <span className="text-sm font-bold">✓</span>
                   </span>{" "}
                   Speed past your competition
                 </li>
                 <li className="box-border relative py-1 pl-0 text-left text-gray-500 border-solid">
-                  <span className="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-yellow-300 rounded-full">
+                  <span className="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-green-600 rounded-full">
                     <span className="text-sm font-bold">✓</span>
                   </span>{" "}
                   Learn the top techniques
@@ -98,12 +92,15 @@ export default function Home() {
             </div>
             {/*       <!-- End  Content --> */}
           </div>
-          <div className="container box-border flex flex-col items-center content-center px-8 mx-auto mt-2 leading-6 text-black border-0 border-gray-300 border-solid md:mt-20 xl:mt-0 md:flex-row">
+          <div
+            className="container box-border flex flex-col items-center content-center px-8 mx-auto mt-12 leading-6 text-black border-0 border-gray-300 border-solid md:mt-20 xl:mt-0 md:flex-row"
+            style={{ marginTop: "150px" }}
+          >
             {/* 
         <!-- Content --> */}
             <div className="box-border w-full text-black border-solid md:w-1/2 md:pl-6 xl:pl-32">
               <h2 className="m-0 text-xl font-semibold leading-tight border-0 border-gray-300 lg:text-3xl md:text-2xl">
-                Automated Tasks
+                Take Notes
               </h2>
               <p className="pt-4 pb-8 m-0 leading-7 text-gray-700 border-0 border-gray-300 sm:pr-10 lg:text-lg">
                 Save time and money with our revolutionary services. We are the
@@ -111,19 +108,19 @@ export default function Home() {
               </p>
               <ul className="p-0 m-0 leading-6 border-0 border-gray-300">
                 <li className="box-border relative py-1 pl-0 text-left text-gray-500 border-solid">
-                  <span className="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-yellow-300 rounded-full">
+                  <span className="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-green-600 rounded-full">
                     <span className="text-sm font-bold">✓</span>
                   </span>{" "}
                   Automated task management workflow
                 </li>
                 <li className="box-border relative py-1 pl-0 text-left text-gray-500 border-solid">
-                  <span className="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-yellow-300 rounded-full">
+                  <span className="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-green-600 rounded-full">
                     <span className="text-sm font-bold">✓</span>
                   </span>{" "}
                   Detailed analytics for your data
                 </li>
                 <li className="box-border relative py-1 pl-0 text-left text-gray-500 border-solid">
-                  <span className="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-yellow-300 rounded-full">
+                  <span className="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-green-600 rounded-full">
                     <span className="text-sm font-bold">✓</span>
                   </span>{" "}
                   Some awesome integrations
@@ -135,7 +132,7 @@ export default function Home() {
         <!-- Image --> */}
             <div className="box-border relative w-full max-w-md px-4 mt-10 mb-4 text-center bg-no-repeat bg-contain border-solid md:mt-0 md:max-w-none lg:mb-0 md:w-1/2">
               <Image
-                src="/img/otebook-and-pen-png-notebook-with-pen-115636115161h6kvvg4bv.png"
+                src="/img/flat-notes.jpg"
                 alt="image"
                 className="p-2 pl-6 pr-5 xl:pl-16 xl:pr-20 "
                 width={500}
@@ -144,6 +141,7 @@ export default function Home() {
             </div>
           </div>
         </section>
+        <ContactForm />
       </Layout>
     </>
   );

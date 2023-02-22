@@ -56,7 +56,7 @@ const index = () => {
             <div className="px-12 mt-10 sm:px-24 md:px-48 lg:px-12 lg:mt-16 xl:px-24 xl:max-w-2xl">
               <div className="flex items-center justify-center cursor-pointer">
                 <div className="text-2xl font-semibold tracking-wide text-indigo-800 ">
-                  ClassRoom
+                  Welcome to ELMA
                 </div>
               </div>
               <div className="mt-12">
@@ -98,7 +98,7 @@ const index = () => {
                     />
                   </div>
                   <div className="mt-10">
-                    <button className="w-full p-4 font-semibold tracking-wide text-gray-100 bg-indigo-500 rounded-lg shadow-lg font-display focus:outline-none focus:shadow-outline hover:bg-indigo-600">
+                    <button className="w-full p-4 text-xl font-semibold tracking-wide text-white bg-green-500 rounded-lg shadow-lg font-display focus:outline-none focus:shadow-outline hover:bg-green-600">
                       Log In
                     </button>
                   </div>

@@ -63,12 +63,12 @@ const CreateNote = ({ refetch }: any) => {
 
   return (
     <div>
-      <div className="py-3 font-semibold tracking-wide uppercase border-b">
+      <div className="py-3 text-xl font-semibold tracking-wide uppercase border-b">
         <h1>Create New Note</h1>
       </div>
       <form className="w-full mt-5" onSubmit={handleSubmit}>
         <label htmlFor="subject">
-          <span className="font-medium">Subject</span>
+          <span className="text-xl font-medium">Subject</span>
           <input
             className="w-full py-2 border rounded-md"
             type="text"
@@ -80,7 +80,7 @@ const CreateNote = ({ refetch }: any) => {
         <div className="py-5">
           <Editor onChange={setEditorValue} />
           <button
-            className="w-full py-2 mt-4 font-semibold text-white bg-blue-600 rounded-sm"
+            className="w-full py-2 mt-4 text-xl font-semibold text-white bg-green-600 rounded-sm"
             type="submit"
           >
             Create Now

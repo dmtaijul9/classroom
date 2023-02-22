@@ -32,6 +32,7 @@ const Attendance = ({ attendance, classId }: any) => {
       onSuccess: (data) => {
         console.log(data);
         toast.success("Success");
+        window.location.reload();
       },
       onError: (err) => {
         console.log(err);
@@ -46,7 +47,7 @@ const Attendance = ({ attendance, classId }: any) => {
   return (
     <div className="mt-6 border rounded-b-sm shadow-sm">
       <div className="flex items-center justify-between px-3 py-3 text-white bg-gray-700">
-        <h1 className="font-semibold">Attendance</h1>
+        <h1 className="text-xl font-semibold">Attendance</h1>
       </div>
 
       <div className="flex flex-col justify-between">

@@ -49,7 +49,7 @@ const index = ({ comments, refetch }: any) => {
   return (
     <div className="border rounded-b-sm shadow-sm ">
       <div className="px-3 py-3 text-white bg-gray-700">
-        <h1 className="font-semibold">Comments</h1>
+        <h1 className="text-xl font-semibold">Comments</h1>
       </div>
       {hasComments ? (
         <div className=" p-4 min-h-[230px] max-h-[600px] flex-col space-y-2 overflow-y-auto">
