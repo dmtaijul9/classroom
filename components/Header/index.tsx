@@ -44,7 +44,7 @@ const HeaderNav = () => {
   return (
     <Disclosure
       as="nav"
-      className="text-white shadow-md bg-gradient-to-tr from-purple-900 to-black"
+      className="overflow-hidden text-white shadow-md bg-gradient-to-tr from-purple-900 to-black"
     >
       {({ open }) => (
         <>
@@ -62,7 +62,10 @@ const HeaderNav = () => {
                 </Disclosure.Button>
               </div>
               <div className="flex items-center justify-center flex-1 sm:justify-start ">
-                <Link href="/" className="flex items-center flex-shrink-0 ">
+                <Link
+                  href="/"
+                  className="flex items-center flex-shrink-0 overflow-hidden bg-white"
+                >
                   <Image
                     src="/img/elma.png"
                     alt="elma logo"
@@ -127,7 +130,7 @@ const HeaderNav = () => {
                       <Menu.Button className="flex rounded-full focus:outline-none ">
                         <span className="sr-only">Create Or Join Class</span>
                         <AiOutlinePlusSquare
-                          className="w-6 h-6"
+                          className="w-10 h-10"
                           aria-hidden="true"
                         />
                       </Menu.Button>
@@ -197,7 +200,7 @@ const HeaderNav = () => {
                 {session?.user ? (
                   <Menu as="div" className="relative ml-2">
                     <div>
-                      <Menu.Button className="flex text-white bg-gray-800 rounded-full focus:outline-none ">
+                      <Menu.Button className="flex text-white rounded-full focus:outline-none ">
                         <span className="sr-only">Open user menu</span>
 
                         {session?.user.image ? (
@@ -213,8 +216,8 @@ const HeaderNav = () => {
                             height={200}
                           />
                         ) : (
-                          <div className="flex items-center justify-center w-8 h-8 rounded-full">
-                            <BiUserCircle size={25} />
+                          <div className="flex items-center justify-center w-12 h-12 rounded-full">
+                            <BiUserCircle size={50} />
                           </div>
                         )}
                       </Menu.Button>
