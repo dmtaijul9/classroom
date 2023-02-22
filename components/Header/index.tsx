@@ -2,8 +2,7 @@
 import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { toast } from "react-toastify";
-import { Popover } from "@headlessui/react";
+
 import { AiOutlinePlusSquare } from "react-icons/ai";
 import { HiXMark, HiBars3 } from "react-icons/hi2";
 import { Fragment } from "react";
@@ -63,16 +62,13 @@ const HeaderNav = () => {
                 </Disclosure.Button>
               </div>
               <div className="flex items-center justify-center flex-1 sm:justify-start ">
-                <Link
-                  href="/"
-                  className="flex items-center flex-shrink-0 bg-white rounded-full "
-                >
+                <Link href="/" className="flex items-center flex-shrink-0 ">
                   <Image
                     src="/img/elma.png"
                     alt="elma logo"
-                    width={90}
+                    width={145}
                     className="rounded-full "
-                    height={90}
+                    height={145}
                   />
                 </Link>
                 <div className="hidden font-semibold sm:ml-6 sm:block">
