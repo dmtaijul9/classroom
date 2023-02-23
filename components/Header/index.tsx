@@ -64,7 +64,7 @@ const HeaderNav = () => {
               <div className="flex items-center justify-center flex-1 sm:justify-start ">
                 <Link
                   href="/"
-                  className="flex items-center flex-shrink-0 overflow-hidden bg-white"
+                  className="flex items-center flex-shrink-0 overflow-hidden "
                 >
                   <Image
                     src="/img/elma.png"
