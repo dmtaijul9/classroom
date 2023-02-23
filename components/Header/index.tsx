@@ -44,7 +44,7 @@ const HeaderNav = () => {
   return (
     <Disclosure
       as="nav"
-      className="overflow-hidden text-white shadow-md bg-gradient-to-tr from-purple-900 to-black"
+      className="text-white shadow-md  bg-gradient-to-tr from-purple-900 to-black"
     >
       {({ open }) => (
         <>
