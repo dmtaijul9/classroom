@@ -13,7 +13,7 @@ const QuestionAnswerPair = ({ question }: any) => {
       question: question?.question,
       answer: textAnswer || radioAnswer,
     };
-    console.log(variable);
+
     dispatch(addAnswer(variable));
     if (variable.answer) {
       setIsSubmited(true);

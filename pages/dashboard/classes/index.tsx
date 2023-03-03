@@ -29,10 +29,10 @@ const index = () => {
           <div className="py-3 border-b">
             <h1 className="text-xl font-semibold">My Class</h1>
           </div>
-          <div className="grid grid-cols-1 gap-4 px-2 mt-10 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2">
+          <div className="allClassRoomGrid">
             {data?.data.classroom?.map((item: any) => (
               <>
-                <div key={item.id} className="p-5 border rounded-md shadow-sm">
+                <div key={item.id} className="classCard">
                   <div className="min-h-[120px] border-b">
                     <h1 className="mb-2 font-medium">{item?.name}</h1>
                     <p> {item?.subject}</p>

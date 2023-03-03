@@ -59,11 +59,10 @@ const SignUpPage = () => {
       <Layout>
         <div className="flex flex-col min-h-[80vh] bg-grey-lighter">
           <div className="container flex flex-col items-center justify-center flex-1 max-w-lg px-2 mx-auto">
-            <form
-              className="w-full px-6 py-8 text-black bg-gray-200 rounded shadow-md"
-              onSubmit={handleSubmit}
-            >
-              <h1 className="mb-8 text-3xl text-center">Create an account</h1>
+            <form className="globalForm" onSubmit={handleSubmit}>
+              <h1 className="mb-8 text-3xl text-center text-white">
+                Create an account
+              </h1>
               <input
                 type="text"
                 className="block w-full p-3 mb-4 border rounded border-grey-light"

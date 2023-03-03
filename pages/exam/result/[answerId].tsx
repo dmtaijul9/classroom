@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 import MetaHead from "../../../components/Head";
 import Pair from "../../../components/answer/Pair";
+import { toast } from "react-toastify";
 
 const updateResult = (value: any) => {
   return axios.put(`/api/exam/result/${value.answerId}`, value, {
@@ -55,12 +56,11 @@ const AnswerResult = () => {
     };
     mutate(variables, {
       onSuccess: (data) => {
-        console.log(data);
         setResult("");
         refetch();
       },
       onError: (err) => {
-        console.log(err);
+        toast.error("Somthing went wrong ");
       },
     });
   };
@@ -80,8 +80,6 @@ const AnswerResult = () => {
                   className="px-4 text-gray-900"
                   value={result}
                   onChange={(e) => {
-                    console.log(e.target.value);
-
                     setResult(e.target.value);
                   }}
                 />

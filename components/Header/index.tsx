@@ -10,6 +10,7 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import Image from "next/image";
 import { BiUserCircle } from "react-icons/bi";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 
 const navigation = [
   { name: "My Class", href: "/my-classes", current: false },
@@ -31,7 +32,7 @@ const HeaderNav = () => {
       await signOut();
       router.push("/");
     } catch (error) {
-      console.log(error);
+      toast.error("Something went wrong!");
     }
   };
   //@ts-ignore
@@ -67,10 +68,10 @@ const HeaderNav = () => {
                   className="flex items-center flex-shrink-0 overflow-hidden "
                 >
                   <Image
-                    src="/img/elma.png"
+                    src="/img/logo.png"
                     alt="elma logo"
                     width={145}
-                    className="rounded-full "
+                    className="bg-white rounded-full w-[90px]"
                     height={145}
                   />
                 </Link>
@@ -144,7 +145,7 @@ const HeaderNav = () => {
                       leaveFrom="transform opacity-100 scale-100"
                       leaveTo="transform opacity-0 scale-95"
                     >
-                      <Menu.Items className="absolute right-0 z-10 w-48 py-1 mt-2 origin-top-right rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                      <Menu.Items className="absolute right-0 z-10 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                         {isAdmin && (
                           <Menu.Item>
                             {({ active }) => (

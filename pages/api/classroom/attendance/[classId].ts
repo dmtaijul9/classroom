@@ -10,17 +10,13 @@ export default async function handler(
     const { classId } = req.query;
     const { text } = req.body;
 
-    console.log(classId, text);
-
     try {
-      console.log(classId, text);
       const createdAttendance = await prisma.attendance.create({
         data: {
           topicName: text,
           classRoomId: classId,
         },
       });
-      console.log(createdAttendance);
 
       if (!createdAttendance) {
         throw new Error("Something went wrong");

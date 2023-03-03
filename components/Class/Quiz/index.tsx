@@ -29,17 +29,14 @@ const index = ({ quizs, isOwnerClass }: any) => {
   const { mutate } = useMutation(deleteQuizRequiest);
 
   const deleteQuizHandler = (id: any) => {
-    console.log(id);
     mutate(
       { id },
       {
         onSuccess: async (data) => {
-          console.log(data);
           toast.success("Successfully deleted!");
           window.location.reload();
         },
         onError: async (err) => {
-          console.log(err);
           toast.error("Sorry! not deleted");
         },
       }

@@ -22,8 +22,6 @@ export default async function handler(
     const userId = req.body;
 
     try {
-      console.log("I am dong");
-
       const deletedClasses = await prisma.classRoom.deleteMany({
         where: {
           teacher: {
@@ -31,9 +29,8 @@ export default async function handler(
           },
         },
       });
-      console.log(deletedClasses);
+
       const deletedUser = await prisma.user.delete({ where: { id: userId } });
-      console.log(deletedUser);
 
       if (!deletedUser || !deletedClasses) {
         throw new Error("Something went wrong");

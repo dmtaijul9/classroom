@@ -51,7 +51,7 @@ const index = ({
         clearForm();
       },
       onError: (err) => {
-        console.log(err);
+        toast.error("Something went wrong!");
       },
     });
   };

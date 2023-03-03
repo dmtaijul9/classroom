@@ -25,7 +25,7 @@ const fetchQuestion = (examId: any) => {
 const ExamPage = () => {
   const router = useRouter();
   const questionAnswer = useSelector(
-    (state) => state.questionAsnwer.questionAnswerPair
+    (state: any) => state.questionAsnwer.questionAnswerPair
   );
 
   const { examId } = router.query;
@@ -49,7 +49,6 @@ const ExamPage = () => {
 
   const isTeacher = exam?.ClassRoom?.userId === session?.user?.id;
 
-  console.log(exam);
   const finishAnswerControler = () => {
     const variables = {
       userId: session?.user?.id,
@@ -65,10 +64,23 @@ const ExamPage = () => {
       },
       onError(error) {
         toast.error("Failed");
-        console.log(error);
       },
     });
   };
+
+  if (!isAppaired && data?.data.message === "Time has been Expired!") {
+    return (
+      <>
+        <Layout>
+          <div className="container py-10 mx-auto">
+            <div className="w-full p-5 text-xl text-center text-white bg-purple-800 rounded-lg">
+              <h1>Time has been Expired!</h1>
+            </div>
+          </div>
+        </Layout>
+      </>
+    );
+  }
 
   return (
     <>

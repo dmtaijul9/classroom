@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { useMutation, useQuery } from "react-query";
+import { toast } from "react-toastify";
 import MetaHead from "../../../components/Head";
 import Layout from "../../../components/UI/Layout";
 
@@ -54,7 +55,7 @@ const attendanceId = () => {
           refetch();
         },
         async onError(error, variables, context) {
-          console.log(error);
+          toast.error("Something went wrong!");
         },
       }
     );

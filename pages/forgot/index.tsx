@@ -28,7 +28,7 @@ const ForgotPassword = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    console.log(inputs.email);
+
     const { email } = inputs;
     if (email.trim() === "") {
       return toast.error("Email is Emptry");
@@ -37,7 +37,6 @@ const ForgotPassword = () => {
     mutate(email, {
       onSuccess: (data) => {
         toast.success("Email has been sent to Console!");
-        console.log(data.data.resetLink);
       },
       onError: () => {
         toast.error("Something went wrong !");

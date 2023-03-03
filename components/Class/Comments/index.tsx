@@ -12,7 +12,6 @@ const index = ({ comments, refetch }: any) => {
 
   const router = useRouter();
   const { classId } = router.query;
-  console.log(classId);
 
   const { inputs, handleChange, clearForm } = useForm({
     comment: "",

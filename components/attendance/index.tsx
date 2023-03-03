@@ -13,7 +13,6 @@ const createAttendence = (topic: any) => {
 };
 
 const Attendance = ({ attendance, classId }: any) => {
-  console.log(attendance, classId);
   const [classTopic, setClassTopic] = useState("");
 
   const { mutate } = useMutation(createAttendence);
@@ -26,16 +25,14 @@ const Attendance = ({ attendance, classId }: any) => {
       text: classTopic,
       classId,
     };
-    console.log(variables);
 
     mutate(variables, {
       onSuccess: (data) => {
-        console.log(data);
         toast.success("Success");
         window.location.reload();
       },
       onError: (err) => {
-        console.log(err);
+        toast.error("Something went wrong!");
       },
     });
   };

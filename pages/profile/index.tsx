@@ -28,13 +28,15 @@ const ProfilePage = () => {
             {/*   @ts-ignore */}
             <p>
               <span className="font-semibold">Role: </span>
-              {session?.user.role}
+              {session?.user?.role}
             </p>
           </div>
 
-          <div className="mt-2 text-center">
-            <div className="flex flex-col items-center justify-center order-1 pb-10 my-16 lg:my-0 lg:order-2">
-              <PassChangeForm selectedRowData={session?.user} isProfile />
+          <div className="globalForm">
+            <div className="mt-2 text-center ">
+              <div className="flex flex-col items-center justify-center order-1 pb-10 my-16 lg:my-0 lg:order-2">
+                <PassChangeForm selectedRowData={session?.user} isProfile />
+              </div>
             </div>
           </div>
         </div>

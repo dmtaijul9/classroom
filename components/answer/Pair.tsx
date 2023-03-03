@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { useMutation } from "react-query";
+import { toast } from "react-toastify";
 import { useForm } from "../../lib/useForm";
 
 const setMark = ({ id, mark }: any) => {
@@ -12,8 +13,6 @@ const setMark = ({ id, mark }: any) => {
 };
 
 const Pair = ({ pair, refetch }: any) => {
-  console.log(pair);
-
   const { mutate, isLoading } = useMutation(setMark);
 
   const { inputs, handleChange } = useForm({
@@ -28,7 +27,7 @@ const Pair = ({ pair, refetch }: any) => {
           refetch();
         },
         onError: async (err) => {
-          console.log(err);
+          toast.error("Something went wrong!");
         },
       }
     );

@@ -8,9 +8,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === "GET") {
-    console.log("Get");
     const { noticeId } = req.query;
-    console.log(noticeId);
 
     try {
       const notice = await prisma.notification.findUnique({

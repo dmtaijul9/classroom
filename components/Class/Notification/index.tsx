@@ -16,7 +16,6 @@ const index = ({ notification, isOwnerClass }: any) => {
   const { classId } = router.query;
   const [newNotification, setNewNotification] = useState("");
   const [message, setMessage] = useState(notification);
-  console.log(message);
 
   useEffect(() => {
     if (notification) {

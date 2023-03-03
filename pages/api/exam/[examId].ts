@@ -8,7 +8,6 @@ export default async function handler(
 ) {
   if (req.method === "GET") {
     const { examId } = req.query;
-    console.log(examId);
 
     try {
       const exam = await prisma.quiz.findUnique({
@@ -25,15 +24,24 @@ export default async function handler(
           ClassRoom: true,
         },
       });
-      console.log(exam);
 
       if (!exam) {
         throw new Error("Something is wrong!");
       }
-      return res.status(200).json({
-        message: "success",
-        exam,
-      });
+
+      const createdAt = new Date(exam.createdAt);
+
+      if (createdAt.getTime() + 30 * 60 * 1000 <= new Date().getTime()) {
+        res.status(200).json({
+          message: "Time has been Expired!",
+          exam,
+        });
+      } else {
+        return res.status(200).json({
+          message: "success",
+          exam,
+        });
+      }
     } catch (err) {
       res.status(500).json({
         message: "Something is Wrong!",

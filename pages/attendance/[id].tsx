@@ -32,7 +32,6 @@ const AttendanceRecieving = () => {
       enabled: !!studentId,
     }
   );
-  console.log(isLoading, data);
 
   useEffect(() => {
     if (status === "unauthenticated") {

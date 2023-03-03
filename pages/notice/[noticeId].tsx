@@ -21,7 +21,6 @@ const SingleNoticePage = () => {
       enabled: !!noticeId,
     }
   );
-  console.log(data);
 
   if (isLoading) {
     return (

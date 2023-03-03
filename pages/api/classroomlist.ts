@@ -37,8 +37,6 @@ export default async function handler(
         classroom: user?.ClassJoins,
       });
     } catch (error) {
-      console.log(error);
-
       res.status(500).json({ message: "Something went wrong" });
     }
   }

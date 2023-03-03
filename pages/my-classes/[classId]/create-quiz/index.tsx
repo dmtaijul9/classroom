@@ -93,12 +93,12 @@ const CreateQuizPage = () => {
     mutate(quiz, {
       onSuccess: async (value) => {
         clearForm();
-        console.log(quizName);
+
         dispatch(resetQuiz());
         router.push("/my-classes");
       },
       onError: async (err) => {
-        console.log(err);
+        toast.error("Something went wrong!");
       },
     });
   };
@@ -110,11 +110,10 @@ const CreateQuizPage = () => {
         <Layout>
           <div className="flex flex-col min-h-[80vh] bg-grey-lighter">
             <div className="container flex flex-col items-center justify-center flex-1 max-w-lg px-2 mx-auto">
-              <form
-                className="w-full px-6 py-8 text-black bg-gray-200 rounded shadow-md"
-                onSubmit={handleSubmit}
-              >
-                <h1 className="mb-8 text-3xl text-center">Set a Quiz name</h1>
+              <form className="globalForm" onSubmit={handleSubmit}>
+                <h1 className="mb-8 text-3xl text-center text-white">
+                  Set a Quiz name
+                </h1>
 
                 <input
                   type="text"
@@ -127,7 +126,7 @@ const CreateQuizPage = () => {
 
                 <button
                   type="submit"
-                  className="w-full py-3 my-1 text-center text-white bg-purple-600 rounded bg-green hover:bg-green-dark focus:outline-none"
+                  className="w-full py-3 my-1 text-center text-white bg-green-600 rounded bg-green hover:bg-green-dark focus:outline-none"
                 >
                   Set
                 </button>

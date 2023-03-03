@@ -7,8 +7,8 @@ const ClassListForTeacher = ({ classroom }: any) => {
       <div className="py-3 border-b">
         <h1 className="text-xl font-semibold">Created Class List</h1>
       </div>
-      <div className="grid grid-cols-4 gap-4 mt-10">
-        {classroom?.map((item) => (
+      <div className="allClassRoomGrid">
+        {classroom?.map((item: any) => (
           <Card key={item.id} item={item} />
         ))}
       </div>
