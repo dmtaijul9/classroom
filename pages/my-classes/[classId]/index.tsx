@@ -10,6 +10,7 @@ import Meterials from "../../../components/Class/Meterials";
 import axios from "axios";
 import { useQuery } from "react-query";
 import Attendance from "../../../components/attendance";
+import MetaHead from "../../../components/Head";
 
 const getClassroomData = (classId: any) => {
   return axios.get(`/api/classroom/single/${classId}`);
@@ -51,66 +52,69 @@ const SingleClassPage = () => {
   }
 
   return (
-    <Layout>
-      <section className="max-w-6xl py-10 mx-auto">
-        <div className="flex justify-between bg-gray-700 min-h-[100px] text-white py-5 px-5 rounded-md shadow-sm items-end">
-          <div>
-            <h1 className="text-xl font-medium"> {classroom?.name} </h1>
-            <p>
-              <span>Total Students :</span> {totalStudents}{" "}
-            </p>
+    <>
+      <MetaHead title="Elma-class" />
+      <Layout>
+        <section className="max-w-6xl py-10 mx-auto">
+          <div className="flex justify-between bg-gray-700 min-h-[100px] text-white py-5 px-5 rounded-md shadow-sm items-end">
+            <div>
+              <h1 className="text-xl font-medium"> {classroom?.name} </h1>
+              <p>
+                <span>Total Students :</span> {totalStudents}{" "}
+              </p>
+            </div>
+            <div>
+              <h1>
+                <span className="font-bold uppercase">Teacher : </span>{" "}
+                {classroom?.teacher.name}
+              </h1>
+            </div>
           </div>
-          <div>
-            <h1>
-              <span className="font-bold uppercase">Teacher : </span>{" "}
-              {classroom?.teacher.name}
-            </h1>
+          <div className="flex justify-between mt-5 bg-gray-700 min-h-[100px] text-white py-5 px-5 rounded-md shadow-sm items-end">
+            <div>
+              <h1> {classroom?.subject} </h1>
+            </div>
+            <div>
+              <a
+                className="px-5 py-2 text-2xl bg-red-600 rounded-sm "
+                target="_blank"
+                href={`/meet/${classroom?.name}?name=${session?.user?.name}&email=${session?.user?.email}`}
+              >
+                {isOwnerClass ? "Create Online Class" : "Join Online Class"}
+              </a>
+            </div>
           </div>
-        </div>
-        <div className="flex justify-between mt-5 bg-gray-700 min-h-[100px] text-white py-5 px-5 rounded-md shadow-sm items-end">
-          <div>
-            <h1> {classroom?.subject} </h1>
-          </div>
-          <div>
-            <a
-              className="px-5 py-2 text-2xl bg-red-600 rounded-sm "
-              target="_blank"
-              href={`/meet/${classroom?.name}?name=${session?.user?.name}&email=${session?.user?.email}`}
-            >
-              {isOwnerClass ? "Create Online Class" : "Join Online Class"}
-            </a>
-          </div>
-        </div>
-        <div className="mt-5">
-          <div className="py-3 border-b">
-            <h1 className="text-xl font-medium uppercase">All Classwork</h1>
-          </div>
-          <div className="flex flex-col mt-10 space-y-5 md:space-x-5 md:space-y-0 md:flex-row">
-            <div className="w-full md:w-2/3">
-              <Notification
-                notification={classroom?.notification}
-                isOwnerClass={isOwnerClass}
-              />
-              <Meterials
-                classId={classroom?.id}
-                meterials={classroom?.meterials}
-                isOwnerClass={isOwnerClass}
-              />
-              <Quiz quizs={classroom?.Quizs} isOwnerClass={isOwnerClass} />
-              {isOwnerClass && (
-                <Attendance
-                  attendance={classroom?.attendance}
-                  classId={classroom?.id}
+          <div className="mt-5">
+            <div className="py-3 border-b">
+              <h1 className="text-xl font-medium uppercase">All Classwork</h1>
+            </div>
+            <div className="flex flex-col mt-10 space-y-5 md:space-x-5 md:space-y-0 md:flex-row">
+              <div className="w-full md:w-2/3">
+                <Notification
+                  notification={classroom?.notification}
+                  isOwnerClass={isOwnerClass}
                 />
-              )}
-            </div>
-            <div className="w-full md:w-1/3">
-              <Comments comments={classroom?.comments} refetch={refetch} />
+                <Meterials
+                  classId={classroom?.id}
+                  meterials={classroom?.meterials}
+                  isOwnerClass={isOwnerClass}
+                />
+                <Quiz quizs={classroom?.Quizs} isOwnerClass={isOwnerClass} />
+                {isOwnerClass && (
+                  <Attendance
+                    attendance={classroom?.attendance}
+                    classId={classroom?.id}
+                  />
+                )}
+              </div>
+              <div className="w-full md:w-1/3">
+                <Comments comments={classroom?.comments} refetch={refetch} />
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-    </Layout>
+        </section>
+      </Layout>
+    </>
   );
 };
 

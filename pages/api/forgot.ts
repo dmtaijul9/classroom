@@ -8,9 +8,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === "POST") {
-    console.log(req.body);
     const email = req.body;
-    console.log(email);
 
     const user = await prisma.user.findUnique({
       where: {

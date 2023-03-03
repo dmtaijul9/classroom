@@ -6,6 +6,7 @@ import axios from "axios";
 import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import MetaHead from "../../components/Head";
 
 const JoinClassPage = () => {
   const { data: session, status } = useSession();
@@ -56,34 +57,36 @@ const JoinClassPage = () => {
     }
   };
   return (
-    <Layout>
-      <div className="flex flex-col min-h-[80vh] bg-grey-lighter">
-        <div className="container flex flex-col items-center justify-center flex-1 max-w-lg px-2 mx-auto">
-          <form
-            className="w-full px-6 py-8 text-black bg-gray-200 rounded shadow-md"
-            onSubmit={handleSubmit}
-          >
-            <h1 className="mb-8 text-3xl text-center">Join a classroom</h1>
-            <input
-              type="text"
-              className="block w-full p-3 mb-4 border rounded border-grey-light"
-              name="joinCode"
-              required
-              value={inputs.joinCode}
-              onChange={handleChange}
-              placeholder="Join Code"
-            />
+    <>
+      <MetaHead title="Elma-Join Class" />
+      <Layout>
+        <div className="flex flex-col min-h-[80vh] bg-grey-lighter">
+          <div className="container flex flex-col items-center justify-center flex-1 max-w-lg px-2 mx-auto">
+            <form className="globalForm" onSubmit={handleSubmit}>
+              <h1 className="mb-8 text-3xl text-center text-white">
+                Join a class
+              </h1>
+              <input
+                type="text"
+                className="block w-full p-3 mb-4 border rounded border-grey-light"
+                name="joinCode"
+                required
+                value={inputs.joinCode}
+                onChange={handleChange}
+                placeholder="Join Code"
+              />
 
-            <button
-              type="submit"
-              className="w-full py-3 my-1 text-center text-white bg-purple-600 rounded bg-green hover:bg-green-dark focus:outline-none"
-            >
-              Join Class
-            </button>
-          </form>
+              <button
+                type="submit"
+                className="w-full py-3 my-1 text-center text-white bg-green-600 rounded bg-green hover:bg-green-dark focus:outline-none"
+              >
+                Join Class
+              </button>
+            </form>
+          </div>
         </div>
-      </div>
-    </Layout>
+      </Layout>
+    </>
   );
 };
 

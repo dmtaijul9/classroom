@@ -8,7 +8,6 @@ export default async function handler(
 ) {
   if (req.method === "GET") {
     const { answerId } = req.query;
-    console.log(answerId);
 
     try {
       const answerPaper = await prisma.answer.findUnique({

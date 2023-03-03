@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import Layout from "../../components/UI/Layout";
 import { useForm } from "../../lib/useForm";
 import { useMutation } from "react-query";
+import MetaHead from "../../components/Head";
 
 const SignUpPage = () => {
   const signupMutation = useMutation((account) => {
@@ -53,76 +54,78 @@ const SignUpPage = () => {
     }
   };
   return (
-    <Layout>
-      <div className="flex flex-col min-h-[80vh] bg-grey-lighter">
-        <div className="container flex flex-col items-center justify-center flex-1 max-w-lg px-2 mx-auto">
-          <form
-            className="w-full px-6 py-8 text-black bg-gray-200 rounded shadow-md"
-            onSubmit={handleSubmit}
-          >
-            <h1 className="mb-8 text-3xl text-center">Create an account</h1>
-            <input
-              type="text"
-              className="block w-full p-3 mb-4 border rounded border-grey-light"
-              name="name"
-              required
-              value={inputs.name}
-              onChange={handleChange}
-              placeholder="Full Name"
-            />
+    <>
+      <MetaHead title="Elma-create user" />
+      <Layout>
+        <div className="flex flex-col min-h-[80vh] bg-grey-lighter">
+          <div className="container flex flex-col items-center justify-center flex-1 max-w-lg px-2 mx-auto">
+            <form className="globalForm" onSubmit={handleSubmit}>
+              <h1 className="mb-8 text-3xl text-center text-white">
+                Create an account
+              </h1>
+              <input
+                type="text"
+                className="block w-full p-3 mb-4 border rounded border-grey-light"
+                name="name"
+                required
+                value={inputs.name}
+                onChange={handleChange}
+                placeholder="Full Name"
+              />
 
-            <input
-              type="email"
-              required
-              className="block w-full p-3 mb-4 border rounded border-grey-light"
-              name="email"
-              value={inputs.email}
-              onChange={handleChange}
-              placeholder="Email"
-            />
-            <select
-              name="role"
-              className="block w-full p-3 mb-4 border rounded border-grey-light"
-              value={inputs.role}
-              required
-              onChange={handleChange}
-            >
-              <option value="">Select a type</option>
+              <input
+                type="email"
+                required
+                className="block w-full p-3 mb-4 border rounded border-grey-light"
+                name="email"
+                value={inputs.email}
+                onChange={handleChange}
+                placeholder="Email"
+              />
+              <select
+                name="role"
+                className="block w-full p-3 mb-4 border rounded border-grey-light"
+                value={inputs.role}
+                required
+                onChange={handleChange}
+              >
+                <option value="">Select a type</option>
 
-              <option value="STUDENT">Student</option>
-              <option value="ADMIN">Admin</option>
-              <option value="TEACHER">Teacher</option>
-            </select>
+                <option value="STUDENT">Student</option>
+                <option value="ADMIN">Admin</option>
+                <option value="TEACHER">Teacher</option>
+              </select>
 
-            <input
-              type="password"
-              className="block w-full p-3 mb-4 border rounded border-grey-light"
-              name="password"
-              required
-              value={inputs.password}
-              onChange={handleChange}
-              placeholder="Password"
-            />
-            <input
-              type="password"
-              className="block w-full p-3 mb-4 border rounded border-grey-light"
-              name="confirm_password"
-              required
-              value={inputs.confirm_password}
-              onChange={handleChange}
-              placeholder="Confirm Password"
-            />
+              <input
+                type="password"
+                className="block w-full p-3 mb-4 border rounded border-grey-light"
+                name="password"
+                required
+                value={inputs.password}
+                onChange={handleChange}
+                placeholder="Password"
+              />
+              <input
+                type="password"
+                className="block w-full p-3 mb-4 border rounded border-grey-light"
+                name="confirm_password"
+                required
+                value={inputs.confirm_password}
+                onChange={handleChange}
+                placeholder="Confirm Password"
+              />
 
-            <button
-              type="submit"
-              className="w-full py-3 my-1 text-xl text-center text-white bg-green-600 rounded bg-green hover:bg-green-dark focus:outline-none"
-            >
-              Create Account
-            </button>
-          </form>
+              <button
+                type="submit"
+                className="w-full py-3 my-1 text-xl text-center text-white bg-green-600 rounded bg-green hover:bg-green-dark focus:outline-none"
+              >
+                Create Account
+              </button>
+            </form>
+          </div>
         </div>
-      </div>
-    </Layout>
+      </Layout>
+    </>
   );
 };
 

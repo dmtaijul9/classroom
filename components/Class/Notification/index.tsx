@@ -6,6 +6,8 @@ import dynamic from "next/dynamic";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { dateParsing } from "../../../lib/Tools";
+import Link from "next/link";
 
 const Editor = dynamic(() => import("../../Editor"), { ssr: false });
 
@@ -17,7 +19,7 @@ const index = ({ notification, isOwnerClass }: any) => {
 
   useEffect(() => {
     if (notification) {
-      setMessage(JSON.parse(notification));
+      setMessage(notification);
     }
   }, [notification]);
 
@@ -55,10 +57,24 @@ const index = ({ notification, isOwnerClass }: any) => {
         <h1 className="text-xl font-semibold">Notification</h1>
       </div>
       {message ? (
-        <div
-          className="p-5 min-h-[230px] notification"
-          dangerouslySetInnerHTML={{ __html: message }}
-        ></div>
+        <ul className="flex flex-col p-4 space-y-3">
+          {notification.map((notice: any) => {
+            return (
+              <li
+                key={notice.id}
+                className="flex items-center justify-between p-2 text-white bg-gray-800"
+              >
+                <p>{dateParsing(notice.createdAt)}</p>
+                <Link
+                  href={`/notice/${notice.id}`}
+                  className="px-4 py-1 bg-red-600 rounded-md"
+                >
+                  See notice
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
       ) : (
         <div className="flex items-center justify-center min-h-[230px] flex-col space-y-2">
           <AiFillNotification size={35} />

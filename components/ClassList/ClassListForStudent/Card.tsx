@@ -5,7 +5,7 @@ const Card = ({ item }: any) => {
   const classroom = item.ClassRoom;
 
   return (
-    <div className="p-5 border rounded-md shadow-sm">
+    <div className="classCard">
       <div className="min-h-[120px] border-b">
         <h1 className="mb-2 font-medium">{classroom?.name}</h1>
         <p> {classroom?.subject}</p>

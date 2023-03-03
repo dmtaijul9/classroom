@@ -49,7 +49,7 @@ const PassChangeForm = ({ selectedRowData, isProfile }: any) => {
         onSubmit={changePassword}
       >
         <label htmlFor="password">
-          Password :
+          <span className="text-white">Password :</span>
           <input
             type="password"
             name="password"
@@ -59,7 +59,7 @@ const PassChangeForm = ({ selectedRowData, isProfile }: any) => {
           />
         </label>
         <label htmlFor="Confirm Password " className="mt-3">
-          Confirm Password :
+          <span className="text-white">Confirm Password :</span>
           <input
             type="password"
             name="confirmPassword"

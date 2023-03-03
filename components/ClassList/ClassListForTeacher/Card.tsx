@@ -10,8 +10,8 @@ const Card = ({ item }: any) => {
   };
 
   return (
-    <div className="p-5 border rounded-md shadow-sm">
-      <div className="min-h-[120px] border-b">
+    <div className="classCard">
+      <div className="min-h-[120px] border-b text-xl">
         <h1 className="mb-2 font-medium">{item.name}</h1>
         <p> {item.subject}</p>
       </div>
@@ -25,7 +25,7 @@ const Card = ({ item }: any) => {
         <div>
           <Link
             href={`/my-classes/${item.id}`}
-            className="px-3 py-1 text-xl text-white bg-red-600 rounded-sm "
+            className="px-4 py-1 text-xl text-white bg-green-600 rounded-lg "
           >
             Go to class
           </Link>

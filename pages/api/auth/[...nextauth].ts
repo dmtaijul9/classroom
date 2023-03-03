@@ -38,7 +38,6 @@ export default NextAuth({
           user?.password
         );
 
-        console.log(checkedPassword);
         if (!checkedPassword) {
           throw new Error("Password Does not Match!");
         }

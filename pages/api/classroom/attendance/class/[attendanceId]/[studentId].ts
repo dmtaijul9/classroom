@@ -60,7 +60,6 @@ export default async function handler(
         message: "Class has been closed",
       });
     } catch (err) {
-      console.log(err);
       return res.status(403).json({
         message: "Something went wrong",
       });

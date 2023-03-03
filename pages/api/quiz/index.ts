@@ -6,7 +6,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  console.log(req.method);
   if (req.method === "PATCH") {
     const { id } = req.body;
     try {
