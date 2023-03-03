@@ -6,6 +6,7 @@ import axios from "axios";
 import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import MetaHead from "../../components/Head";
 
 const index = () => {
   const { data: session, status } = useSession();
@@ -53,43 +54,46 @@ const index = () => {
     }
   };
   return (
-    <Layout>
-      <div className="flex flex-col min-h-[80vh] bg-grey-lighter">
-        <div className="container flex flex-col items-center justify-center flex-1 max-w-lg px-2 mx-auto">
-          <form
-            className="w-full px-6 py-8 text-black bg-gray-200 rounded shadow-md"
-            onSubmit={handleSubmit}
-          >
-            <h1 className="mb-8 text-3xl text-center">Create a new class</h1>
-            <input
-              type="text"
-              className="block w-full p-3 mb-4 border rounded border-grey-light"
-              name="name"
-              required
-              value={inputs.name}
-              onChange={handleChange}
-              placeholder="Class Name"
-            />
-            <input
-              type="text"
-              className="block w-full p-3 mb-4 border rounded border-grey-light"
-              name="subject"
-              required
-              value={inputs.subject}
-              onChange={handleChange}
-              placeholder="Class Subject"
-            />
-
-            <button
-              type="submit"
-              className="w-full py-3 my-1 text-xl text-center text-white bg-green-600 rounded bg-green hover:bg-green-dark focus:outline-none"
+    <>
+      <MetaHead title="elma-create class" />
+      <Layout>
+        <div className="flex flex-col min-h-[80vh] bg-grey-lighter">
+          <div className="container flex flex-col items-center justify-center flex-1 max-w-lg px-2 mx-auto">
+            <form
+              className="w-full px-6 py-8 text-black bg-gray-200 rounded shadow-md"
+              onSubmit={handleSubmit}
             >
-              Create Class
-            </button>
-          </form>
+              <h1 className="mb-8 text-3xl text-center">Create a new class</h1>
+              <input
+                type="text"
+                className="block w-full p-3 mb-4 border rounded border-grey-light"
+                name="name"
+                required
+                value={inputs.name}
+                onChange={handleChange}
+                placeholder="Class Name"
+              />
+              <input
+                type="text"
+                className="block w-full p-3 mb-4 border rounded border-grey-light"
+                name="subject"
+                required
+                value={inputs.subject}
+                onChange={handleChange}
+                placeholder="Class Subject"
+              />
+
+              <button
+                type="submit"
+                className="w-full py-3 my-1 text-xl text-center text-white bg-green-600 rounded bg-green hover:bg-green-dark focus:outline-none"
+              >
+                Create Class
+              </button>
+            </form>
+          </div>
         </div>
-      </div>
-    </Layout>
+      </Layout>
+    </>
   );
 };
 

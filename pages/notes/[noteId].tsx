@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useMutation, useQuery } from "react-query";
 import { toast } from "react-toastify";
+import MetaHead from "../../components/Head";
 import Layout from "../../components/UI/Layout";
 
 const fetchNote = (noteId: any) => {
@@ -69,31 +70,35 @@ const SingleNotePage = () => {
   }
 
   return (
-    <Layout>
-      <section className="max-w-5xl mx-auto">
-        <div className="px-4 py-3 text-white bg-gray-700 rounded-md">
-          <h1>
-            <span className="font-semibold ">Subject : </span> {note?.subject}{" "}
-          </h1>
-        </div>
-        <div className="mt-5 border min-h-[500px] p-5 rounded-md shadow-md">
-          {!isLoading && (
-            <div
-              dangerouslySetInnerHTML={{ __html: noteText }}
-              className="w-full overflow-x-auto"
-            ></div>
-          )}
-        </div>
-        <div className="mt-5 text-right">
-          <button
-            className="py-1.5 px-5 bg-red-500 text-white rounded-sm"
-            onClick={deleteHandler}
-          >
-            Delete
-          </button>
-        </div>
-      </section>
-    </Layout>
+    <>
+      {" "}
+      <MetaHead title="Elma-note" />
+      <Layout>
+        <section className="max-w-5xl mx-auto">
+          <div className="px-4 py-3 text-white bg-gray-700 rounded-md">
+            <h1>
+              <span className="font-semibold ">Subject : </span> {note?.subject}{" "}
+            </h1>
+          </div>
+          <div className="mt-5 border min-h-[500px] p-5 rounded-md shadow-md">
+            {!isLoading && (
+              <div
+                dangerouslySetInnerHTML={{ __html: noteText }}
+                className="w-full overflow-x-auto"
+              ></div>
+            )}
+          </div>
+          <div className="mt-5 text-right">
+            <button
+              className="py-1.5 px-5 bg-red-500 text-white rounded-sm"
+              onClick={deleteHandler}
+            >
+              Delete
+            </button>
+          </div>
+        </section>
+      </Layout>
+    </>
   );
 };
 

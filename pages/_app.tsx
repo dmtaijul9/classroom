@@ -19,7 +19,7 @@ export default function App({
       <SessionProvider session={session}>
         <QueryClientProvider client={queryClient}>
           <Component {...pageProps} />
-          <ToastContainer />
+          <ToastContainer position="top-center" hideProgressBar={true} />
         </QueryClientProvider>
       </SessionProvider>
     </Provider>

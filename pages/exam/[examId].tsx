@@ -7,6 +7,7 @@ import { useMutation, useQuery } from "react-query";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import QuestionAnswerPair from "../../components/Class/exam/QuestionAnswerPair";
+import MetaHead from "../../components/Head";
 import Layout from "../../components/UI/Layout";
 
 const submitAnswer = (answerData) => {
@@ -70,79 +71,86 @@ const ExamPage = () => {
   };
 
   return (
-    <Layout>
-      {isLoading ? (
-        <div className="container mx-auto">Loading...</div>
-      ) : !isTeacher ? (
-        <section className="container m-auto">
-          <div>
-            <div className="flex justify-between w-full px-4 py-5 text-center text-white bg-gray-900 rounded-sm">
-              <h1>
-                <span className="font-bold">Exam Name:</span> {exam?.examName}
-              </h1>
-              <button
-                className="px-4 py-1 bg-red-500"
-                onClick={() => {
-                  if (isAppaired) {
-                    router.push("/exam/result/" + isAppaired.id);
-                  }
-                }}
-              >
-                {!isAppaired ? "You can't see Result now" : "See Result"}
-              </button>
-            </div>
-            {isAppaired ? (
-              <div className="mt-5 text-center">
-                <h1>You are already appaired in this exam. Thank you</h1>
+    <>
+      {" "}
+      <MetaHead title="elma-exam" />
+      <Layout>
+        {isLoading ? (
+          <div className="container mx-auto">Loading...</div>
+        ) : !isTeacher ? (
+          <section className="container m-auto">
+            <div>
+              <div className="flex justify-between w-full px-4 py-5 text-center text-white bg-gray-900 rounded-sm">
+                <h1>
+                  <span className="font-bold">Exam Name:</span> {exam?.examName}
+                </h1>
+                <button
+                  className="px-4 py-1 bg-red-500"
+                  onClick={() => {
+                    if (isAppaired) {
+                      router.push("/exam/result/" + isAppaired.id);
+                    }
+                  }}
+                >
+                  {!isAppaired ? "You can't see Result now" : "See Result"}
+                </button>
               </div>
-            ) : (
-              <div className="flex flex-col mt-5 space-y-7">
-                {exam?.questions?.map((question: any) => {
-                  return (
-                    <QuestionAnswerPair key={question.id} question={question} />
-                  );
-                })}
+              {isAppaired ? (
+                <div className="mt-5 text-center">
+                  <h1>You are already appaired in this exam. Thank you</h1>
+                </div>
+              ) : (
+                <div className="flex flex-col mt-5 space-y-7">
+                  {exam?.questions?.map((question: any) => {
+                    return (
+                      <QuestionAnswerPair
+                        key={question.id}
+                        question={question}
+                      />
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+            {!isAppaired && (
+              <div className="mt-20 text-center">
+                <button
+                  className="px-4 py-1 text-white bg-red-500"
+                  onClick={finishAnswerControler}
+                >
+                  Finish Answer
+                </button>
               </div>
             )}
-          </div>
-          {!isAppaired && (
-            <div className="mt-20 text-center">
-              <button
-                className="px-4 py-1 text-white bg-red-500"
-                onClick={finishAnswerControler}
-              >
-                Finish Answer
-              </button>
-            </div>
-          )}
-        </section>
-      ) : (
-        <section className="container mx-auto">
-          <div className="pb-2 font-bold border-b">List Of Answers</div>
-          <div>
-            {exam?.answer?.map((answer: any) => {
-              return (
-                <div
-                  key={answer.id}
-                  className="flex justify-between px-3 py-2 mt-4 text-white bg-gray-800"
-                >
-                  <h1>
-                    <span>Student Name: </span>
-                    {answer.student.name}
-                  </h1>
-                  <Link
-                    href={`/exam/result/${answer.id}`}
-                    className="px-4 py-1 text-white bg-red-500 rounded"
+          </section>
+        ) : (
+          <section className="container mx-auto">
+            <div className="pb-2 font-bold border-b">List Of Answers</div>
+            <div>
+              {exam?.answer?.map((answer: any) => {
+                return (
+                  <div
+                    key={answer.id}
+                    className="flex justify-between px-3 py-2 mt-4 text-white bg-gray-800"
                   >
-                    See Answer
-                  </Link>
-                </div>
-              );
-            })}
-          </div>
-        </section>
-      )}
-    </Layout>
+                    <h1>
+                      <span>Student Name: </span>
+                      {answer.student.name}
+                    </h1>
+                    <Link
+                      href={`/exam/result/${answer.id}`}
+                      className="px-4 py-1 text-white bg-red-500 rounded"
+                    >
+                      See Answer
+                    </Link>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+        )}
+      </Layout>
+    </>
   );
 };
 

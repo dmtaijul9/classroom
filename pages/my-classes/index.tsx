@@ -5,6 +5,7 @@ import React, { useEffect } from "react";
 import { useQuery } from "react-query";
 import ClassListForStudent from "../../components/ClassList/ClassListForStudent";
 import ClassListForTeacher from "../../components/ClassList/ClassListForTeacher";
+import MetaHead from "../../components/Head";
 import Layout from "../../components/UI/Layout";
 
 const getClassroomList = (userId) => {
@@ -54,20 +55,23 @@ const MyClassListPage = ({ classroom }: any) => {
   }
 
   return (
-    <Layout>
-      <section className="container mx-auto">
-        {isTeacher ? (
-          <>
-            <ClassListForTeacher classroom={data?.data?.createdClass} />
-            <div className="mt-10">
-              <ClassListForStudent classroom={data?.data?.classroom} />
-            </div>
-          </>
-        ) : (
-          <ClassListForStudent classroom={data?.data?.classroom} />
-        )}
-      </section>
-    </Layout>
+    <>
+      <MetaHead title="Elma-All classess" />
+      <Layout>
+        <section className="container mx-auto">
+          {isTeacher ? (
+            <>
+              <ClassListForTeacher classroom={data?.data?.createdClass} />
+              <div className="mt-10">
+                <ClassListForStudent classroom={data?.data?.classroom} />
+              </div>
+            </>
+          ) : (
+            <ClassListForStudent classroom={data?.data?.classroom} />
+          )}
+        </section>
+      </Layout>
+    </>
   );
 };
 
