@@ -6,6 +6,7 @@ import axios from "axios";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import MetaHead from "../../../components/Head";
+import Pair from "../../../components/answer/Pair";
 
 const updateResult = (value: any) => {
   return axios.put(`/api/exam/result/${value.answerId}`, value, {
@@ -29,7 +30,7 @@ const AnswerResult = () => {
     if (status === "unauthenticated") {
       router.push("/login");
     }
-  }, []);
+  }, [status]);
 
   const { data, isLoading, error, refetch } = useQuery(
     ["answerPaper", answerId],
@@ -97,20 +98,9 @@ const AnswerResult = () => {
               {answerPaper?.result ? answerPaper?.result : "Under review"}
             </h1>
           </div>
-          <div>
+          <div className="flex flex-col space-y-10">
             {answerPaper?.quiestionAnswer?.map((pair: any) => {
-              return (
-                <div key={pair.id} className="px-3 mt-5">
-                  <h1>
-                    {" "}
-                    <span>Question: </span> {pair.question}{" "}
-                  </h1>
-                  <h1>
-                    {" "}
-                    <span>Answer: </span> {pair.answer}{" "}
-                  </h1>
-                </div>
-              );
+              return <Pair key={pair.id} pair={pair} refetch={refetch} />;
             })}
           </div>
           <div className="mt-10 text-center">

@@ -10,7 +10,7 @@ import QuestionAnswerPair from "../../components/Class/exam/QuestionAnswerPair";
 import MetaHead from "../../components/Head";
 import Layout from "../../components/UI/Layout";
 
-const submitAnswer = (answerData) => {
+const submitAnswer = (answerData: any) => {
   return axios.post(`/api/exam`, answerData, {
     headers: {
       "Content-Type": "application/json",

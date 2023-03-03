@@ -8,6 +8,8 @@ export default async function handler(
 ) {
   if (req.method === "GET") {
     const { examId } = req.query;
+    console.log(examId);
+
     try {
       const exam = await prisma.quiz.findUnique({
         where: {
@@ -23,6 +25,7 @@ export default async function handler(
           ClassRoom: true,
         },
       });
+      console.log(exam);
 
       if (!exam) {
         throw new Error("Something is wrong!");

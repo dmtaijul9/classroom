@@ -36,6 +36,11 @@ export default async function handler(
               createdAt: "desc",
             },
           },
+          notification: {
+            orderBy: {
+              createdAt: "desc",
+            },
+          },
         },
       });
 

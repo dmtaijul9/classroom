@@ -132,6 +132,7 @@ model QuistionAnswer {
   id       String  @id @default(uuid())
   question String
   answer   String
+  mark     Int?
   Answer   Answer? @relation(fields: [answerId], references: [id])
   answerId String?
 }
