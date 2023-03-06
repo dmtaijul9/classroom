@@ -25,6 +25,8 @@ function classNames(...classes) {
 const HeaderNav = () => {
   const router = useRouter();
 
+  const { pathname } = router;
+
   const { data: session, status } = useSession();
 
   const logoutHandler = async () => {
@@ -79,20 +81,26 @@ const HeaderNav = () => {
                   <div className="flex items-center space-x-4">
                     <Link
                       href="/about-us"
-                      className="px-3 py-2 text-2xl font-bold rounded-md"
+                      className={`py-2 mx-3 text-2xl font-bold hover:border-b ${
+                        pathname === "/about-us" ? "text-green-600" : ""
+                      }`}
                     >
                       About Us
                     </Link>
                     <Link
                       href="/contact-us"
-                      className="px-3 py-2 text-2xl font-bold rounded-md"
+                      className={`py-2 mx-3 text-2xl font-bold hover:border-b ${
+                        pathname === "/contact-us" ? "text-green-600" : ""
+                      }`}
                     >
                       Contact Us
                     </Link>
                     {isTeacher || isStudent ? (
                       <Link
                         href="/my-classes"
-                        className="px-3 py-2 text-2xl font-bold rounded-md"
+                        className={`py-2 mx-3 text-2xl font-bold hover:border-b ${
+                          pathname === "/my-classes" ? "text-green-600" : ""
+                        }`}
                       >
                         My Classes
                       </Link>
@@ -100,7 +108,9 @@ const HeaderNav = () => {
                     {isStudent && (
                       <Link
                         href="/notes"
-                        className="px-3 py-2 text-2xl font-bold rounded-md"
+                        className={`py-2 mx-3 text-2xl font-bold hover:border-b ${
+                          pathname === "/notes" ? "text-green-600" : ""
+                        }`}
                       >
                         My Notes
                       </Link>
@@ -109,13 +119,21 @@ const HeaderNav = () => {
                       <>
                         <Link
                           href="/dashboard/user-management"
-                          className="px-3 py-2 text-2xl font-bold rounded-md"
+                          className={`py-2 mx-3 text-2xl font-bold hover:border-b ${
+                            pathname === "/dashboard/user-management"
+                              ? "text-green-600"
+                              : ""
+                          }`}
                         >
                           User Management
                         </Link>
                         <Link
                           href="/dashboard/classes"
-                          className="px-3 py-2 text-2xl font-bold rounded-md"
+                          className={`py-2 mx-3 text-2xl font-bold hover:border-b ${
+                            pathname === "/dashboard/classes"
+                              ? "text-green-600"
+                              : ""
+                          }`}
                         >
                           Classes
                         </Link>
@@ -290,22 +308,86 @@ const HeaderNav = () => {
 
           <Disclosure.Panel className="sm:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              {navigation.map((item) => (
+              <Disclosure.Button
+                as="a"
+                href="/about-us"
+                className={classNames(
+                  pathname === "/about-us"
+                    ? "bg-gray-900 text-white"
+                    : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                  "block px-3 py-2 rounded-md text-base font-bold"
+                )}
+              >
+                About Us
+              </Disclosure.Button>
+              <Disclosure.Button
+                as="a"
+                href="/contact-us"
+                className={classNames(
+                  pathname === "/contact-us"
+                    ? "bg-gray-900 text-white"
+                    : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                  "block px-3 py-2 rounded-md text-base font-bold"
+                )}
+              >
+                Contact Us
+              </Disclosure.Button>
+              {isTeacher || isStudent ? (
                 <Disclosure.Button
-                  key={item.name}
                   as="a"
-                  href={item.href}
+                  href="/my-classes"
                   className={classNames(
-                    item.current
+                    pathname === "/my-classes"
                       ? "bg-gray-900 text-white"
                       : "text-gray-300 hover:bg-gray-700 hover:text-white",
                     "block px-3 py-2 rounded-md text-base font-bold"
                   )}
-                  aria-current={item.current ? "page" : undefined}
                 >
-                  {item.name}
+                  My Classes
                 </Disclosure.Button>
-              ))}
+              ) : null}
+              {isStudent ? (
+                <Disclosure.Button
+                  as="a"
+                  href="/notes"
+                  className={classNames(
+                    pathname === "/notes"
+                      ? "bg-gray-900 text-white"
+                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                    "block px-3 py-2 rounded-md text-base font-bold"
+                  )}
+                >
+                  My Notes
+                </Disclosure.Button>
+              ) : null}
+              {isAdmin ? (
+                <>
+                  <Disclosure.Button
+                    as="a"
+                    href="/dashboard/user-management"
+                    className={classNames(
+                      pathname === "/dashboard/user-management"
+                        ? "bg-gray-900 text-white"
+                        : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                      "block px-3 py-2 rounded-md text-base font-bold"
+                    )}
+                  >
+                    User management
+                  </Disclosure.Button>
+                  <Disclosure.Button
+                    as="a"
+                    href="/dashboard/classes"
+                    className={classNames(
+                      pathname === "/dashboard/classes"
+                        ? "bg-gray-900 text-white"
+                        : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                      "block px-3 py-2 rounded-md text-base font-bold"
+                    )}
+                  >
+                    All Classess
+                  </Disclosure.Button>
+                </>
+              ) : null}
             </div>
           </Disclosure.Panel>
         </>

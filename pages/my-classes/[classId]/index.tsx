@@ -27,7 +27,7 @@ const SingleClassPage = () => {
     if (status === "unauthenticated") {
       router.push("/login");
     }
-  });
+  }, [status]);
 
   const { data, isLoading, isError, refetch } = useQuery(
     ["singleClass", classId],

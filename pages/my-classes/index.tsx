@@ -26,15 +26,10 @@ const MyClassListPage = ({ classroom }: any) => {
   const isStudent = session?.user?.role === "STUDENT";
 
   useEffect(() => {
-    if (status === "authenticated") {
-      if (!isTeacher && !isStudent) {
-        router.push("/");
-      }
-    }
     if (status === "unauthenticated") {
       router.push("/");
     }
-  });
+  }, [status]);
 
   const { data, isLoading, isError } = useQuery(
     ["ClassList", userId],

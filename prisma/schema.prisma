@@ -125,14 +125,14 @@ model Quiz {
   ClassRoom   ClassRoom? @relation(fields: [classRoomId], references: [id])
   classRoomId String?
   createdAt   DateTime   @default(now())
-  expireTime  String?
+  expireTime  Int?       @default(30)
 }
 
 model QuistionAnswer {
   id       String  @id @default(uuid())
   question String
   answer   String
-  mark     Int?
+  mark     Float?
   Answer   Answer? @relation(fields: [answerId], references: [id])
   answerId String?
 }
