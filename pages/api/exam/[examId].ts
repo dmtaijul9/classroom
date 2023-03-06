@@ -29,9 +29,11 @@ export default async function handler(
         throw new Error("Something is wrong!");
       }
 
+      const checkTime = exam.expireTime || 1;
+
       const createdAt = new Date(exam.createdAt);
 
-      if (createdAt.getTime() + 30 * 60 * 1000 <= new Date().getTime()) {
+      if (createdAt.getTime() + checkTime * 60 * 1000 <= new Date().getTime()) {
         res.status(200).json({
           message: "Time has been Expired!",
           exam,

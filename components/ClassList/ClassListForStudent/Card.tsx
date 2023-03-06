@@ -15,7 +15,7 @@ const Card = ({ item }: any) => {
         <div>
           <Link
             href={`/my-classes/${classroom?.id}`}
-            className="px-3 py-1 text-white bg-red-600 rounded-sm "
+            className="px-4 py-1 text-xl text-white bg-green-600 rounded-lg "
           >
             Go to class
           </Link>

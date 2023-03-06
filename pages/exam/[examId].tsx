@@ -43,11 +43,11 @@ const ExamPage = () => {
 
   const exam = data?.data.exam;
 
+  const isTeacher = exam?.ClassRoom?.userId === session?.user?.id;
+
   const isAppaired = exam?.answer?.find(
     (item) => item.userId === session?.user.id
   );
-
-  const isTeacher = exam?.ClassRoom?.userId === session?.user?.id;
 
   const finishAnswerControler = () => {
     const variables = {
@@ -68,7 +68,11 @@ const ExamPage = () => {
     });
   };
 
-  if (!isAppaired && data?.data.message === "Time has been Expired!") {
+  if (
+    !isTeacher &&
+    !isAppaired &&
+    data?.data.message === "Time has been Expired!"
+  ) {
     return (
       <>
         <Layout>

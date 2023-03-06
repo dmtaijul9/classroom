@@ -7,15 +7,21 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === "POST") {
-    const { examName, questions } = req.body;
+    const { examName, questions, expireTime } = req.body;
 
     const { classId } = req.query;
 
     try {
       const response = await prisma.quiz.create({
         data: {
+          ClassRoom: {
+            connect: {
+              id: classId,
+            },
+          },
           examName,
-          classRoomId: classId,
+
+          expireTime: Number(expireTime),
           questions: {
             createMany: {
               data: [...questions],
@@ -31,6 +37,7 @@ export default async function handler(
     } catch (error) {
       res.status(400).json({
         message: "Something is wrong",
+        error: error,
       });
     }
   }

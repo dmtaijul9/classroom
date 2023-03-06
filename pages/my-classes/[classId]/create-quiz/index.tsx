@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Layout from "../../../../components/UI/Layout";
 import { useForm } from "../../../../lib/useForm";
 import { useSelector, useDispatch } from "react-redux";
@@ -7,6 +7,7 @@ import {
   examNameAdded,
   quizAdded,
   resetQuiz,
+  setExpireTimeState,
 } from "../../../../redux/resolvers/quizeSlice";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -25,6 +26,7 @@ const CreateQuizPage = () => {
   const router = useRouter();
 
   const { classId } = router.query;
+  const [expireTime, setExpireTime] = useState(0);
 
   const quizName = useRef<any>();
   const dispatch = useDispatch();
@@ -52,6 +54,7 @@ const CreateQuizPage = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
+    dispatch(setExpireTimeState(expireTime));
     dispatch(examNameAdded(quizName.current.value));
   };
 
@@ -122,6 +125,18 @@ const CreateQuizPage = () => {
                   required
                   ref={quizName}
                   placeholder="Quiz Name"
+                />
+
+                <input
+                  type="number"
+                  className="block w-full p-3 mb-4 border rounded border-grey-light"
+                  name="expireTime"
+                  required
+                  value={expireTime}
+                  onChange={(e) => {
+                    setExpireTime(e.target.value);
+                  }}
+                  placeholder="Expire Time?"
                 />
 
                 <button

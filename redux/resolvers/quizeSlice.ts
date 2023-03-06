@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   examName: "",
+  expireTime: 0,
   questions: [],
 };
 
@@ -18,8 +19,12 @@ const quizSlice = createSlice({
     resetQuiz: (state, action) => {
       (state.examName = ""), (state.questions = []);
     },
+    setExpireTimeState: (state, action) => {
+      state.expireTime = action.payload;
+    },
   },
 });
 
-export const { examNameAdded, quizAdded, resetQuiz } = quizSlice.actions;
+export const { examNameAdded, quizAdded, resetQuiz, setExpireTimeState } =
+  quizSlice.actions;
 export default quizSlice.reducer;
