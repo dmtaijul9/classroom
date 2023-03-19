@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState, useEffect } from "react";
-
 import { AiFillNotification } from "react-icons/ai";
 import dynamic from "next/dynamic";
 import { toast } from "react-toastify";
