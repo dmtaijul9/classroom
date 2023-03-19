@@ -65,6 +65,8 @@ const AnswerResult = () => {
     });
   };
 
+  console.log("isTeacher", isTeacher);
+
   return (
     <>
       <MetaHead title="Elma-exam result" />
@@ -98,7 +100,14 @@ const AnswerResult = () => {
           </div>
           <div className="flex flex-col space-y-10">
             {answerPaper?.quiestionAnswer?.map((pair: any) => {
-              return <Pair key={pair.id} pair={pair} refetch={refetch} />;
+              return (
+                <Pair
+                  key={pair.id}
+                  pair={pair}
+                  refetch={refetch}
+                  isTeacher={isTeacher}
+                />
+              );
             })}
           </div>
           <div className="mt-10 text-center">

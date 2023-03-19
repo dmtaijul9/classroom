@@ -12,7 +12,7 @@ const setMark = ({ id, mark }: any) => {
   });
 };
 
-const Pair = ({ pair, refetch }: any) => {
+const Pair = ({ pair, refetch, isTeacher }: any) => {
   const { mutate, isLoading } = useMutation(setMark);
 
   const { inputs, handleChange } = useForm({
@@ -48,7 +48,7 @@ const Pair = ({ pair, refetch }: any) => {
       <div className="flex flex-col space-y-2">
         {pair.mark ? (
           <p>{pair.mark}</p>
-        ) : (
+        ) : isTeacher ? (
           <>
             <input
               type="number"
@@ -64,7 +64,7 @@ const Pair = ({ pair, refetch }: any) => {
               Set Mark
             </button>
           </>
-        )}
+        ) : null}
       </div>
     </div>
   );
