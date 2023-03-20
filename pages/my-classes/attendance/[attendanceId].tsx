@@ -45,6 +45,8 @@ const attendanceId = () => {
     enabled: !!attendanceId,
   });
 
+  console.log(data);
+
   const { mutate } = useMutation(closeAttendance);
 
   const closeButtonHandler = () => {

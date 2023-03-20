@@ -5,7 +5,7 @@ const ContactForm = () => {
     <section className="relative text-gray-600 body-font">
       <div className="container px-5 py-24 mx-auto">
         <div className="flex flex-col w-full mb-12 text-center">
-          <h1 className="mb-4 text-2xl font-bold text-gray-900 sm:text-3xl title-font">
+          <h1 className="mb-4 text-2xl font-bold text-green-600 sm:text-3xl title-font">
             Contact Us
           </h1>
         </div>
@@ -15,7 +15,7 @@ const ContactForm = () => {
               <div className="relative">
                 <label
                   htmlFor="name"
-                  className="text-sm leading-7 text-gray-600"
+                  className="text-lg leading-7 text-gray-600"
                 >
                   Name
                 </label>
@@ -31,7 +31,7 @@ const ContactForm = () => {
               <div className="relative">
                 <label
                   htmlFor="email"
-                  className="text-sm leading-7 text-gray-600"
+                  className="text-lg leading-7 text-gray-600"
                 >
                   Email
                 </label>
@@ -47,7 +47,7 @@ const ContactForm = () => {
               <div className="relative">
                 <label
                   htmlFor="message"
-                  className="text-sm leading-7 text-gray-600"
+                  className="text-lg leading-7 text-gray-600"
                 >
                   Message
                 </label>
@@ -60,7 +60,7 @@ const ContactForm = () => {
             </div>
             <div className="w-full p-2">
               <button className="flex px-8 py-2 mx-auto text-lg text-white bg-green-500 border-0 rounded focus:outline-none hover:bg-green-600">
-                Button
+                Submit
               </button>
             </div>
           </div>

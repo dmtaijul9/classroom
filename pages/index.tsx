@@ -21,7 +21,7 @@ export default function Home() {
                   <h1 className="mb-12 text-2xl font-bold tracking-wide md:text-3xl xl:text-5xl">
                     E-Learning <br />
                     Management <br /> Approach (
-                    <span className="text-blue-600">ELMA</span>)
+                    <span className="text-green-600">ELMA</span>)
                   </h1>
                   <Link
                     className="inline-block py-3 mr-2 text-lg font-bold leading-snug text-white uppercase transition duration-150 ease-in-out bg-green-600 rounded shadow-md px-7 hover:bg-green-700 hover:shadow-lg focus:bg-green-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-800 active:shadow-lg"

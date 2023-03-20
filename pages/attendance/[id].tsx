@@ -33,6 +33,8 @@ const AttendanceRecieving = () => {
     }
   );
 
+  console.log(data);
+
   useEffect(() => {
     if (status === "unauthenticated") {
       router.push("/login");

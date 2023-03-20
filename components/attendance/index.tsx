@@ -1,5 +1,6 @@
 import axios from "axios";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { useMutation } from "react-query";
 import { toast } from "react-toastify";
@@ -12,8 +13,9 @@ const createAttendence = (topic: any) => {
   });
 };
 
-const Attendance = ({ attendance, classId }: any) => {
+const Attendance = ({ attendance, classId, isOwnerClass }: any) => {
   const [classTopic, setClassTopic] = useState("");
+  const router = useRouter();
 
   const { mutate } = useMutation(createAttendence);
 
@@ -51,43 +53,50 @@ const Attendance = ({ attendance, classId }: any) => {
         <div className="min-h-[100px] p-4">
           {attendance?.map((item: any) => {
             return (
-              <Link
-                href={`/my-classes/attendance/${item.id}`}
+              <div
+                onClick={() => {
+                  if (isOwnerClass) {
+                    router.push(`/my-classes/attendance/${item.id}`);
+                  }
+                }}
                 key={item.id}
                 className="flex items-center justify-between p-2 mt-3 text-white bg-gray-700 rounded-sm"
               >
                 <h1> {item.topicName} </h1>
                 <button
-                  className="px-3 py-1 bg-red-600 rounded-md"
-                  onClick={() => {
+                  className="z-10 px-3 py-1 bg-red-600 rounded-md"
+                  onClick={(event) => {
+                    event.stopPropagation();
                     navigator.clipboard.writeText(createLink(item));
                     toast.success("Copied successfylly!");
                   }}
                 >
                   Copy Link
                 </button>
-              </Link>
+              </div>
             );
           })}
         </div>
-        <div className=" min-h-[230px] p-4 space-y-2 overflow-y-auto">
-          <label htmlFor="classTopic">
-            Topic:
-            <input
-              type="text"
-              value={classTopic}
-              className="w-full py-2 border "
-              placeholder="Type Class Topic"
-              onChange={(e: any) => setClassTopic(e.target.value)}
-            />
-          </label>
-          <button
-            className="px-5 py-2 text-center text-white bg-red-600 rounded-md"
-            onClick={createAttendanceHandler}
-          >
-            Create Attendance
-          </button>
-        </div>
+        {isOwnerClass && (
+          <div className=" min-h-[230px] p-4 space-y-2 overflow-y-auto">
+            <label htmlFor="classTopic">
+              Topic:
+              <input
+                type="text"
+                value={classTopic}
+                className="w-full py-2 border "
+                placeholder="Type Class Topic"
+                onChange={(e: any) => setClassTopic(e.target.value)}
+              />
+            </label>
+            <button
+              className="px-5 py-2 text-center text-white bg-red-600 rounded-md"
+              onClick={createAttendanceHandler}
+            >
+              Create Attendance
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -80,7 +80,7 @@ const SingleClassPage = () => {
                 target="_blank"
                 href={`/meet/${classroom?.name}?name=${session?.user?.name}&email=${session?.user?.email}`}
               >
-                {isOwnerClass ? "Create Online Class" : "Join Online Class"}
+                {isOwnerClass ? "Create Online Meeting" : "Join Online Meeting"}
               </a>
             </div>
           </div>
@@ -100,12 +100,12 @@ const SingleClassPage = () => {
                   isOwnerClass={isOwnerClass}
                 />
                 <Quiz quizs={classroom?.Quizs} isOwnerClass={isOwnerClass} />
-                {isOwnerClass && (
-                  <Attendance
-                    attendance={classroom?.attendance}
-                    classId={classroom?.id}
-                  />
-                )}
+
+                <Attendance
+                  attendance={classroom?.attendance}
+                  classId={classroom?.id}
+                  isOwnerClass={isOwnerClass}
+                />
               </div>
               <div className="w-full md:w-1/3">
                 <Comments comments={classroom?.comments} refetch={refetch} />
