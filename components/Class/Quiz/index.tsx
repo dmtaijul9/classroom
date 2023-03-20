@@ -72,7 +72,7 @@ const index = ({ quizs, isOwnerClass }: any) => {
                     className="px-2 py-2 text-white bg-red-600 rounded-md "
                   >
                     {" "}
-                    {isOwnerClass ? "Check" : "Appair"} Exam{" "}
+                    {isOwnerClass ? "Evaluate" : "Appair"} Exam{" "}
                   </Link>
                   {isOwnerClass && (
                     <button

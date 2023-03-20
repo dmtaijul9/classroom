@@ -58,7 +58,7 @@ const index = () => {
             <div className="lg:w-1/2 xl:max-w-screen-sm">
               <div className="px-12 mt-10 sm:px-24 md:px-48 lg:px-12 lg:mt-16 xl:px-24 xl:max-w-2xl">
                 <div className="flex items-center justify-center cursor-pointer">
-                  <div className="text-2xl font-semibold tracking-wide text-indigo-800 ">
+                  <div className="text-2xl font-semibold tracking-wide text-green-600 ">
                     Welcome to ELMA
                   </div>
                 </div>
@@ -85,7 +85,7 @@ const index = () => {
                         <div>
                           <Link
                             href="/forgot"
-                            className="text-xs font-semibold text-indigo-600 cursor-pointer font-display hover:text-indigo-800"
+                            className="text-xs font-semibold text-green-600 cursor-pointer font-display hover:text-green-800"
                           >
                             Forgot Password?
                           </Link>
