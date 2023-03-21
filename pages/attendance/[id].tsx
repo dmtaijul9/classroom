@@ -24,16 +24,15 @@ const AttendanceRecieving = () => {
   const studentId = session?.user?.id;
 
   const { data, isLoading } = useQuery(
-    ["attendance", studentId],
+    ["attendance", studentId, id],
     () => {
       return attendClassQuery({ attendanceId: id, studentId });
     },
     {
-      enabled: !!studentId,
+      enabled: !!studentId && !!id,
+      refetchOnWindowFocus: false,
     }
   );
-
-  console.log(data);
 
   useEffect(() => {
     if (status === "unauthenticated") {
