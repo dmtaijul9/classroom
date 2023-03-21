@@ -24,9 +24,10 @@ export default async function handler(
           },
         },
       });
+      console.log(attendanceId, studentId);
 
       if (isAllowAttendance?.isAllow) {
-        const isAlreadyDone = isAllowAttendance.students.find((student) => {
+        const isAlreadyDone = isAllowAttendance?.students.find((student) => {
           return student.userId === studentId;
         });
 
