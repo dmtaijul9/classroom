@@ -80,7 +80,7 @@ const SingleClassPage = () => {
                 target="_blank"
                 href={`/meet/${classroom?.name}?name=${session?.user?.name}&email=${session?.user?.email}`}
               >
-                {isOwnerClass ? "Create Online Meeting" : "Join Online Meeting"}
+                {isOwnerClass ? "Create Online Meeting" : "Create Online Meeting"}
               </a>
             </div>
           </div>
